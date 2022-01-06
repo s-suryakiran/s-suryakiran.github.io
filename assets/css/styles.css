@@ -564,7 +564,7 @@ body::-webkit-scrollbar {
 }
 .progress-container {
   position: fixed;
-  top:4rem;
+  top:25pt;
 	right: 0px;
 	width: 8px;
 	height: 100%;
