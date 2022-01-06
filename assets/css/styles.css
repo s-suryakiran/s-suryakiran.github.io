@@ -557,3 +557,34 @@ img {
     width: 450px;
   }
 }
+
+/* custom scroll bar */
+body::-webkit-scrollbar {
+	display: none; /* for Chrome, Safari, and Opera */
+}
+.progress-container {
+  position: fixed;
+  top:4rem;
+	right: 0px;
+	width: 8px;
+	height: 100%;
+	background: #222;
+	border-radius: 10px;
+	margin: auto;
+}
+
+.progress-bar {
+	width: 8px;
+	background: #3E6FF4;
+	border-radius: 2px;
+}
+
+.progress-bar:before {
+	height: 1%;
+}
+
+.glow {
+	-webkit-box-shadow: 0px 0px 5px 10px rgba(62, 111, 244, 0.48);
+	-moz-box-shadow: 0px 0px 5px 10px rgba(62, 111, 244, 0.48);
+	box-shadow: 0px 0px 5px 10px rgba(62, 111, 244, 0.48);
+}
