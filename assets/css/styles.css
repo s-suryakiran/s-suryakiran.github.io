@@ -42,6 +42,8 @@
 
 html {
   scroll-behavior: smooth;
+  cursor: url('../img/cursor.png'),auto;
+  height: 100%;
 }
 
 body {
