@@ -488,33 +488,22 @@
 
     <!--===== MAIN JS =====-->
     <script src="assets/js/main.js"></script>
-    <!-- 
-
-        Chatbot Bubble
-        <div class="chatbot-bubble" onclick="openChatbot()">
-            <img src="assets/img/chatbot-icon.png" alt="Chatbot Icon">
-        </div>
-
-        Chatbot Overlay 
-        <div id="chatbotOverlay" class="overlay">
-            <div class="overlay-content">
-                <span class="closebtn" onclick="closeChatbot()">&times;</span>
-                <iframe src="https://suryakiran.streamlit.app/" frameborder="0"></iframe>
-            </div>
-        </div> -->
 
     <!-- Chatbot Bubble -->
-    <div class="chatbot-bubble" onclick="openChatbot()">
-        <img src="assets/img/chatbot-icon.png" alt="Chatbot Icon">
-    </div>
-
-    <!-- Chatbot Overlay -->
-    <div id="chatbotOverlay" class="overlay">
-        <div class="overlay-content">
-            <span class="closebtn" onclick="closeChatbot()">&times;</span>
-            <iframe src="https://suryakiran.streamlit.app/?embedded=true" frameborder="0"></iframe>
+    <div class="chatbot-container">
+        <div class="thought-cloud" id="thought-cloud">Hello! Ask anything about Surya.</div>
+        <div class="chatbot-bubble" onclick="openChatbot()">
+          <img src="assets/img/chatbot-icon.png" alt="Chatbot Icon">
         </div>
-    </div>
+      </div>
+    
+      <!-- Chatbot Overlay -->
+      <div id="chatbotOverlay" class="overlay">
+        <div class="overlay-content">
+          <span class="closebtn" onclick="closeChatbot()">&times;</span>
+          <iframe src="https://suryakiran.streamlit.app/?embedded=true" frameborder="0"></iframe>
+        </div>
+      </div>
 
     <script>
         function openChatbot() {
@@ -524,6 +513,14 @@
         function closeChatbot() {
             document.getElementById('chatbotOverlay').style.display = 'none';
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const thoughtCloud = document.getElementById('thought-cloud');
+            thoughtCloud.style.display = 'block';
+            setTimeout(function () {
+                thoughtCloud.style.display = 'none';
+            }, 10000);
+        });
     </script>
 
 </body>
