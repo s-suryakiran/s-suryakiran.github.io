@@ -1,97 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/css/styles.css">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LEWEDQKYZ8"></script>
-        <script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LEWEDQKYZ8"></script>
+    <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-LEWEDQKYZ8');
-        </script>
-        <!-- =====BOX ICONS===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-        <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
-        <title>Suryakiran's Portfolio</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
-    </head>
-    <body>
-        <div class="progress-container">
-            <div id="progressbar" class="progress-bar"></div>
-        </div>
-        <!--===== HEADER =====-->
-        <header class="l-header">
-            <nav class="nav bd-grid">
+    </script>
+    <!-- =====BOX ICONS===== -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <title>Suryakiran's Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+</head>
+
+<body>
+    <div class="progress-container">
+        <div id="progressbar" class="progress-bar"></div>
+    </div>
+    <!--===== HEADER =====-->
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a href="#" class="nav__logo">Suryakiran</a>
+            </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                    <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                    <!-- <li class="nav__item"><a href="#areasofinterest" class="nav__link">Areas Of Interest</a></li> -->
+                    <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                    <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="l-main">
+        <!--===== HOME =====-->
+        <section class="home bd-grid" id="home">
+            <div class="home__data">
+                <h1 class="home__title">Hi,<br>I am <span class="home__title-color">Suryakiran</span><br> Sureshkumar
+                </h1>
+
+                <a href="./assets/Suryakiran_S_(Resume).pdf" class="button">Download Resume</a>
+            </div>
+
+            <div class="home__social">
+                <a href="https://www.linkedin.com/in/suryakiran-sureshkumar/" class="home__social-icon"><i
+                        class='bx bxl-linkedin'></i></a>
+                <a href="mailto:suryakiranbdsk@gmail.com" class="home__social-icon"><i class='bx bx-envelope'></i></a>
+                <a href="https://github.com/s-suryakiran" class="home__social-icon"><i class='bx bxl-github'></i></a>
+            </div>
+
+            <div class="home__img">
+                <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <mask id="mask0" mask-type="alpha">
+                        <path
+                            d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+                    </mask>
+                    <g mask="url(#mask0)">
+                        <path
+                            d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+                        <image class="home__blob-img" x="50" y="60" href="assets/img/Surya-profile.png" />
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!--===== ABOUT =====-->
+        <section class="about section " id="about">
+            <h2 class="section-title">About</h2>
+
+            <div class="about__container bd-grid">
+                <div class="about__img">
+                    <img src="assets/img/Surya.png" alt="">
+                </div>
+
                 <div>
-                    <a href="#" class="nav__logo">Suryakiran</a>
+                    <h2 class="about__subtitle">I am Suryakiran Sureshkumar</h2>
+                    <p class="about__text">I'm currently pursuing Master of Science in Computer Science at NYU's Courant
+                        Institute of Mathematical Sciences, specializing in advanced topics like machine learning, data
+                        science, and software development. Prior to this, I served as a Machine Learning Engineer at
+                        Tiger Analytics, leading projects in computer vision and machine learning for global clients and
+                        overseeing a team managing a no-code data science platform. I've also honed skills in cloud
+                        computing, natural language processing, and data analytics through hackathons and projects. My
+                        passion lies in tackling complex challenges with data and technology, always eager to acquire
+                        new skills and tools. I prioritize collaboration, innovation, and quality in my work, aiming to
+                        deliver solutions that meet client and stakeholder expectations. I'm open to new opportunities
+                        and connections in the realms of machine learning, data science, and software engineering.</p>
                 </div>
-
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <!-- <li class="nav__item"><a href="#areasofinterest" class="nav__link">Areas Of Interest</a></li> -->
-                        <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                        <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </nav>
-        </header>
-
-        <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h1 class="home__title">Hi,<br>I am <span class="home__title-color">Suryakiran</span><br> Sureshkumar</h1>
-
-                    <a href="./assets/Suryakiran_S_(Resume).pdf" class="button">Download Resume</a>
-                </div>
-
-                <div class="home__social">
-                    <a href="https://www.linkedin.com/in/suryakiran-sureshkumar/" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="mailto:suryakiranbdsk@gmail.com" class="home__social-icon"><i class='bx bx-envelope' ></i></a>
-                    <a href="https://github.com/s-suryakiran" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                </div>
-
-                <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="60" href="assets/img/Surya-profile.png"/>
-                        </g>
-                    </svg>
-                </div>
-            </section>
-
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
-
-                <div class="about__container bd-grid">
-                    <div class="about__img">
-                        <img src="assets/img/Surya.png" alt="">
-                    </div>
-                    
-                    <div>
-                        <h2 class="about__subtitle">I am Suryakiran Sureshkumar</h2>
-                        <p class="about__text">I'm currently pursuing Master of Science in Computer Science at NYU's Courant Institute of Mathematical Sciences, specializing in advanced topics like machine learning, data science, and software development. Prior to this, I served as a Machine Learning Engineer at Tiger Analytics, leading projects in computer vision and machine learning for global clients and overseeing a team managing a no-code data science platform. I've also honed skills in cloud computing, natural language processing, and data analytics through hackathons and projects. My passion lies in tackling complex challenges with data and technology, always eager to acquire new skills and tools. I prioritize collaboration, innovation, and quality in my work, aiming to deliver solutions that meet client and stakeholder expectations. I'm open to new opportunities and connections in the realms of machine learning, data science, and software engineering.</p>           
-                    </div>                                   
-                </div>
-            </section>
-            <!--===== Areas of Interest =====-->
-            <!-- <section class="about section " id="about">
+            </div>
+        </section>
+        <!--===== Areas of Interest =====-->
+        <!-- <section class="about section " id="about">
                 <h2 class="section-title">About</h2>
 
                 <div class="about__container bd-grid">
@@ -106,59 +122,73 @@
                 </div>
             </section> -->
 
-            <!--===== SKILLS =====-->
-            <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
+        <!--===== SKILLS =====-->
+        <section class="skills section" id="skills">
+            <h2 class="section-title">Skills</h2>
 
-                <div class="skills__container bd-grid">          
-                    <div>
-                        <h2 class="skills__subtitle">Technical Skills</h2>
-                            <div class="skills__category">
-                                <strong>Programming Languages:</strong>
-                                <span>Python, C++, C, Java, Go</span>
-                              </div>
-                              <br>
-                        <div class="skills__category">
-                            <strong>Web Technologies:</strong>
-                            <span>HTML, CSS, JavaScript, PHP, React.js, Node.js, Express.js, jQuery</span>
-                          </div>
-                          <br>
-                          <div class="skills__category">
-                            <strong>Database:</strong>
-                            <span>MySQL, Oracle, MongoDB, PostgreSQL</span>
-                          </div>
-                          <br>
-                          <div class="skills__category">
-                            <strong>Cloud Technologies:</strong>
-                            <span>Azure, Oracle</span>
-                          </div>
-                          <br>
-                          <div class="skills__category">
-                            <strong>Tools & Platforms:</strong>
-                            <span>Postman, Power Apps, Tableau, DataBricks, Docker, GitHub, GitLab, Azure DevOps</span>
-                          </div>
-                          <br>
-                          <div class="skills__category">
-                            <strong>Frameworks:</strong>
-                            <span>Flask, Django, FastAPI, Flutter, Spark, PyTorch, Tensorflow</span>
-                          </div>
-                          <br>
-                          <div class="skills__category">
-                            <strong>Libraries:</strong>
-                            <span>Pandas, NumPy, Scikit-Learn, OpenCV, PySpark, Matplotlib</span>
-                          </div>
+            <div class="skills__container bd-grid">
+                <div>
+                    <h2 class="skills__subtitle">Technical Skills</h2>
+                    <div class="skills__category">
+                        <strong>Programming Languages:</strong>
+                        <span>Python, C++, C, Java, Go</span>
                     </div>
-                    
-                    <div>              
-                        <img src="assets/img/Skill.png" alt="" class="skills__img">
+                    <br>
+                    <div class="skills__category">
+                        <strong>Web Technologies:</strong>
+                        <span>HTML, CSS, JavaScript, PHP, React.js, Node.js, Express.js, jQuery</span>
+                    </div>
+                    <br>
+                    <div class="skills__category">
+                        <strong>Database:</strong>
+                        <span>MySQL, Oracle, MongoDB, PostgreSQL</span>
+                    </div>
+                    <br>
+                    <div class="skills__category">
+                        <strong>Cloud Technologies:</strong>
+                        <span>Azure, Oracle</span>
+                    </div>
+                    <br>
+                    <div class="skills__category">
+                        <strong>Tools & Platforms:</strong>
+                        <span>Postman, Power Apps, Tableau, DataBricks, Docker, GitHub, GitLab, Azure DevOps</span>
+                    </div>
+                    <br>
+                    <div class="skills__category">
+                        <strong>Frameworks:</strong>
+                        <span>Flask, Django, FastAPI, Flutter, Spark, PyTorch, Tensorflow</span>
+                    </div>
+                    <br>
+                    <div class="skills__category">
+                        <strong>Libraries:</strong>
+                        <span>Pandas, NumPy, Scikit-Learn, OpenCV, PySpark, Matplotlib</span>
                     </div>
                 </div>
-            </section>
 
-            <!--===== WORK =====-->
-            <section class="work section" id="projects">
+                <div>
+                    <img src="assets/img/Skill.png" alt="" class="skills__img">
+                </div>
+            </div>
+        </section>
+
+        <!--===== WORK =====-->
+        <!-- <section class="work section" id="projects">
                 <h2 class="section-title">Projects</h2>
                 <div class="work__container bd-grid">
+
+                    <div class="card" onclick="flip(event)">
+                        <div class="front">
+                            <a  class="work__img">
+                                
+                                <img src="assets/img/Project9.png" alt="">
+                            </a>
+                        
+                        </div>
+                        <div class="back work__img">
+                          <p>Developed a novel method to tackle supervised data scarcity in autonomous driving by fine-tuning the QwenVL Vision-Language Model. Tested on CARLA driving routes, our method processed visual inputs to generate precise vehicle control commands. With just 5% of the data, we achieved 40% of the traditional models' performance, closely matching them at 20%, and surpassing at 40%, showcasing the potential of Vision-Language Models in enhancing data efficiency.</p>
+                        </div>
+                      </div>
+
                     <div class="card" onclick="flip(event)">
                         <div class="front">
                             <a  class="work__img">
@@ -172,7 +202,6 @@
                         </div>
                       </div>
 
-                <!-- <div class="work__container bd-grid"> -->
                     <div class="card" onclick="flip(event)">
                         <div class="front">
                             <a  class="work__img">
@@ -267,49 +296,236 @@
                         </div>
                       </div>
                 </div>
-            </section>
-<br/>
-<br/>
-<br/>
-<br/><br/>
-<br/>
-<br/>
-<br/><br/>
-<br/>
-            <!--===== CONTACT =====-->
-            <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
+            </section> -->
 
-                <div class="contact__container bd-grid">
-                    <form action="https://formsubmit.co/suryakiranbdsk@gmail.com" method = "post" class="contact__form">
-                        <input type="hidden" name="_next" value="https://s-suryakiran.github.io/Suryakiran-S-Portfolio/thankyoupage.html">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="text" name="name" placeholder="Name" class="contact__input">
-                        <input type="mail" name="email" placeholder="Email" class="contact__input">
-                        <textarea name="message" id="" cols="0" rows="10" class="contact__input"></textarea>
-                        <input type="submit" value="Email" class="contact__button button">
-                    </form>
+
+        <section class="work section" id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="work__container bd-grid">
+
+                <div class="project-popout">
+                    <img src="assets/img/Project9.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>DriveVLM</h3>
+                            <p>Developed a novel method to tackle supervised data scarcity in autonomous driving by
+                                fine-tuning the QwenVL Vision-Language Model. Tested on CARLA driving routes, our method
+                                processed visual inputs to generate precise vehicle control commands. With just 5% of
+                                the data, we achieved 40% of the traditional models' performance, closely matching them
+                                at 20%, and surpassing at 40%, showcasing the potential of Vision-Language Models in
+                                enhancing data efficiency.</p>
+                            <a href="https://github.com/s-suryakiran/DriveVLM" target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
                 </div>
-            </section>
-        </main>
 
-        <!--===== FOOTER =====-->
-        <footer class="footer">
-            <p class="footer__title">Suryakiran</p>
-            <div class="footer__social">
+                <div class="project-popout">
+                    <img src="assets/img/Project8.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>ChatLoom</h3>
+                            <p>It is a specialized chatbot leveraging OpenAI's advanced language models, ChatLoom is
+                                tailored to provide detailed answers on cosmology and astrophysics topics. With a focus
+                                on replicating the expertise found in the cosmos field, this chatbot offers a seamless
+                                local setup, making cosmic knowledge accessible right from your desktop.</p>
+                            <a href="https://github.com/s-suryakiran/ChatLoom" target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
 
-                 <a href="https://www.linkedin.com/in/s-suryakiran/" class="footer__icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="mailto:suryakiranbdsk@gmail.com" class="footer__icon"><i class='bx bx-envelope' ></i></a>
-                    <a href="https://github.com/s-suryakiran" class="footer__icon"><i class='bx bxl-github' ></i></a>
+
+                <div class="project-popout">
+                    <img src="assets/img/Project7.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>SegMentor</h3>
+                            <p>It is a novel future frame segmentation approach using the SimVP model and MogaNet. It
+                                predicts the 22nd segmented frame using DeepLabV3+ network from 11 RGB frames, achieving
+                                a Jaccard Index score of 0.2952 on validation and 0.2852 on the hidden test set,
+                                demonstrating its potential for applications in computer vision, including Autonomous
+                                Driving.</p>
+                            <a href="https://github.com/s-suryakiran/SegMentor" target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="project-popout">
+                    <img src="assets/img/Project6.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>Pokemon GAN</h3>
+                            <p>Created a DC-GAN (Deep Convolutional Generative Adversarial Network) using PyTorch
+                                programming language and trained it on a dataset of Pokemon images. This allowed me to
+                                generate brand new Pokemon images that had not been seen before.</p>
+                            <a href="https://github.com/s-suryakiran/Pokemon-GAN" target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-popout">
+                    <img src="assets/img/Project5.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>Using Video Summarization For Effective Search</h3>
+                            <p>This system improves the searchability and indexing of videos in a database using
+                                techniques such as video summarization, keyframe extraction, image captioning, and
+                                removing common words (stop words). It is implemented using Pytorch and extracts
+                                relevant keywords for input videos to improve search results.</p>
+                            <a href="https://github.com/s-suryakiran/Using-Video-summarization-techniques-for-effective-search-indexing"
+                                target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-popout">
+                    <img src="assets/img/Project1.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>Deep Learning Framework for Component Identification</h3>
+                            <p>It is a setup to monitor the assembly line of a manufacturing unit and use object
+                                detection algorithm to detect, classify and count the various components in the
+                                monitored image. It also extracts the coordinates of various components in the assembly
+                                line and provide it to an automated system.</p>
+                            <a href="https://link.springer.com/article/10.1007/s41870-022-00895-z"
+                                target="_blank">Paper</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-popout">
+                    <img src="assets/img/Project2.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>Covid Fight</h3>
+                            <p>This is a mobile application that helps users during the coronavirus pandemic. The
+                                features of the app include delivering a live count of cases, a crisis communication
+                                chatbot that helps users resolve their doubts regarding the pandemic, a self-diagnosis
+                                feature, notifying the users to wash their hands regularly, and giving them immediate
+                                access to the distress number.</p>
+                            <a href="https://github.com/s-suryakiran/COVID-Fight" target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-popout">
+                    <img src="assets/img/Project3.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>Phishing Site Detection</h3>
+                            <p>It is a web application with a chrome extension that detects whether a particular website
+                                is phishing or not, using a neural network, by extracting 14 features from the
+                                particular site. A comprehensive analysis of the attack will be periodically sent to the
+                                cyber department.</p>
+                            <a href="https://github.com/s-suryakiran/phishing_site_detection" target="_blank">GitHub</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-popout">
+                    <img src="assets/img/Project4.png" alt="Project Image" class="project-popout-image">
+                    <div class="project-popout-overlay">
+                        <div class="project-popout-overlay-content">
+                            <h3>Night-time Object Detection using Machine Learning</h3>
+                            <p>It is a setup which uses CCTV camera and detects required objects in night. We used a
+                                modified YOLO algorithm exclusively for object detection during night time .We presented
+                                paper on this project in the Seventh National Conference on Computer Vision, Pattern
+                                Recognition, Image Processing and Graphics.</p>
+                            <a href="https://link.springer.com/chapter/10.1007/978-981-15-8697-2_52"
+                                target="_blank">Paper</a>
+                            <button class="close-overlay" onclick="closeOverlay(event)">X</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <p class="footer__copy">&#169; Suryakiran. All rights reserved</p>
-        </footer>
 
 
-        <!--===== SCROLL REVEAL =====-->
-        <script src="https://unpkg.com/scrollreveal"></script>
+        </section>
 
-        <!--===== MAIN JS =====-->
-        <script src="assets/js/main.js"></script>
-    </body>
+
+        <!--===== CONTACT =====-->
+        <section class="contact section" id="contact">
+            <h2 class="section-title">Contact</h2>
+
+            <div class="contact__container bd-grid">
+                <form action="https://formsubmit.co/suryakiranbdsk@gmail.com" method="post" class="contact__form">
+                    <input type="hidden" name="_next"
+                        value="https://s-suryakiran.github.io/Suryakiran-S-Portfolio/thankyoupage.html">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="name" placeholder="Name" class="contact__input">
+                    <input type="mail" name="email" placeholder="Email" class="contact__input">
+                    <textarea name="message" id="" cols="0" rows="10" class="contact__input"></textarea>
+                    <input type="submit" value="Email" class="contact__button button">
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!--===== FOOTER =====-->
+    <footer class="footer">
+        <p class="footer__title">Suryakiran</p>
+        <div class="footer__social">
+
+            <a href="https://www.linkedin.com/in/s-suryakiran/" class="footer__icon"><i class='bx bxl-linkedin'></i></a>
+            <a href="mailto:suryakiranbdsk@gmail.com" class="footer__icon"><i class='bx bx-envelope'></i></a>
+            <a href="https://github.com/s-suryakiran" class="footer__icon"><i class='bx bxl-github'></i></a>
+        </div>
+        <p class="footer__copy">&#169; Suryakiran. All rights reserved</p>
+    </footer>
+
+
+    <!--===== SCROLL REVEAL =====-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--===== MAIN JS =====-->
+    <script src="assets/js/main.js"></script>
+    <!-- 
+
+        Chatbot Bubble
+        <div class="chatbot-bubble" onclick="openChatbot()">
+            <img src="assets/img/chatbot-icon.png" alt="Chatbot Icon">
+        </div>
+
+        Chatbot Overlay 
+        <div id="chatbotOverlay" class="overlay">
+            <div class="overlay-content">
+                <span class="closebtn" onclick="closeChatbot()">&times;</span>
+                <iframe src="https://suryakiran.streamlit.app/" frameborder="0"></iframe>
+            </div>
+        </div> -->
+
+    <!-- Chatbot Bubble -->
+    <div class="chatbot-bubble" onclick="openChatbot()">
+        <img src="assets/img/chatbot-icon.png" alt="Chatbot Icon">
+    </div>
+
+    <!-- Chatbot Overlay -->
+    <div id="chatbotOverlay" class="overlay">
+        <div class="overlay-content">
+            <span class="closebtn" onclick="closeChatbot()">&times;</span>
+            <iframe src="https://suryakiran.streamlit.app/?embedded=true" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openChatbot() {
+            document.getElementById('chatbotOverlay').style.display = 'flex';
+        }
+
+        function closeChatbot() {
+            document.getElementById('chatbotOverlay').style.display = 'none';
+        }
+    </script>
+
+</body>
+
 </html>

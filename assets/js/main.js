@@ -2,42 +2,42 @@ const progressBar = document.getElementById("progressbar");
 progressBar.style.height = 1 + "%";
 
 window.onscroll = function () {
-	const scroll = document.documentElement.scrollTop;
-	const height =
-		document.documentElement.scrollHeight - document.documentElement.clientHeight;
-	let scrolled = (scroll / height) * 100;
+    const scroll = document.documentElement.scrollTop;
+    const height =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (scroll / height) * 100;
 
-	if (scrolled <= 1) {
-		progressBar.style.height = 1 + "%";
-	} else if (scrolled >= 2 && scrolled <= 99.9) {
-		progressBar.style.height = scrolled + "%";
-		progressBar.classList.remove("glow");
-	} else if (scrolled === 100) {
-		progressBar.style.height = scrolled + "%";
-		// 		Do something when reached 100% scroll
-		progressBar.classList.add("glow");
-	}
+    if (scrolled <= 1) {
+        progressBar.style.height = 1 + "%";
+    } else if (scrolled >= 2 && scrolled <= 99.9) {
+        progressBar.style.height = scrolled + "%";
+        progressBar.classList.remove("glow");
+    } else if (scrolled === 100) {
+        progressBar.style.height = scrolled + "%";
+        // 		Do something when reached 100% scroll
+        progressBar.classList.add("glow");
+    }
 };
 
 
 
-/*===== MENU SHOW =====*/ 
-const showMenu = (toggleId, navId) =>{
+/*===== MENU SHOW =====*/
+const showMenu = (toggleId, navId) => {
     const toggle = document.getElementById(toggleId),
-    nav = document.getElementById(navId)
+        nav = document.getElementById(navId)
 
-    if(toggle && nav){
-        toggle.addEventListener('click', ()=>{
+    if (toggle && nav) {
+        toggle.addEventListener('click', () => {
             nav.classList.toggle('show')
         })
     }
 }
-showMenu('nav-toggle','nav-menu')
+showMenu('nav-toggle', 'nav-menu')
 
 /*==================== REMOVE MENU MOBILE ====================*/
 const navLink = document.querySelectorAll('.nav__link')
 
-function linkAction(){
+function linkAction() {
     const navMenu = document.getElementById('nav-menu')
     // When we click on each nav__link, we remove the show-menu class
     navMenu.classList.remove('show')
@@ -47,17 +47,17 @@ navLink.forEach(n => n.addEventListener('click', linkAction))
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
 const sections = document.querySelectorAll('section[id]')
 
-function scrollActive(){
+function scrollActive() {
     const scrollY = window.pageYOffset
 
-    sections.forEach(current =>{
+    sections.forEach(current => {
         const sectionHeight = current.offsetHeight
         const sectionTop = current.offsetTop - 50;
         sectionId = current.getAttribute('id')
 
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
-        }else{
+        } else {
             document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
         }
     })
@@ -66,28 +66,43 @@ window.addEventListener('scroll', scrollActive)
 
 /*===== SCROLL REVEAL ANIMATION =====*/
 const sr = ScrollReveal({
-    origin: 'top',
-    distance: '60px',
-    duration: 2000,
-    delay: 200,
-//     reset: true
+    duration: 800,
+    // delay: 20,
+    // reset: true
 });
 
-sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
-sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
-sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__category, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text', {});
+sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img', { delay: 400 });
+sr.reveal('.home__social-icon', { interval: 200 });
+sr.reveal('.skills__category, .project-popout, .contact__input', { interval: 200 });
 
-/*===== FLIP REVEAL ANIMATION =====*/
-function flip(event){
-	var element = event.currentTarget;
-	if (element.className === "card") {
-    if(element.style.transform == "rotateY(180deg)") {
-      element.style.transform = "rotateY(0deg)";
-    }
-    else {
-      element.style.transform = "rotateY(180deg)";
-    }
-  }
-};
+function openChatbot() {
+    document.getElementById('chatbotOverlay').style.display = 'flex';
+}
 
+function closeChatbot() {
+    document.getElementById('chatbotOverlay').style.display = 'none';
+}
+
+document.querySelectorAll('.project-popout').forEach(project => {
+    project.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevent triggering document click event
+        const overlay = this.querySelector('.project-popout-overlay');
+        overlay.classList.add('active');
+    });
+});
+
+function closeOverlay(event) {
+    event.stopPropagation(); // Prevent triggering document click event
+    const overlay = event.currentTarget.closest('.project-popout-overlay');
+    overlay.classList.remove('active');
+}
+
+// Close the overlay when clicking outside of it
+document.addEventListener('click', function (event) {
+    if (!event.target.closest('.project-popout-overlay')) {
+        document.querySelectorAll('.project-popout-overlay.active').forEach(overlay => {
+            overlay.classList.remove('active');
+        });
+    }
+});
