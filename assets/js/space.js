@@ -771,14 +771,43 @@
       mctx.arc(cx + pl.x * scale, cy + pl.y * scale, pl.isSun ? 4 : 2.5, 0, Math.PI * 2);
       mctx.fill();
     }
-    // Rocket
-    mctx.fillStyle = '#7dd3fc';
-    mctx.shadowBlur = 8;
-    mctx.shadowColor = '#7dd3fc';
+    // Rocket — distinct arrow + pulsing halo so it never looks like a planet
+    const rx = cx + rocket.x * scale;
+    const ry = cy + rocket.y * scale;
+    const pulse = 1 + 0.35 * Math.sin(sunPulse * 4);
+
+    // Outer pulsing ring
+    mctx.strokeStyle = 'rgba(125, 211, 252, 0.55)';
+    mctx.lineWidth = 1.2;
     mctx.beginPath();
-    mctx.arc(cx + rocket.x * scale, cy + rocket.y * scale, 3, 0, Math.PI * 2);
+    mctx.arc(rx, ry, 7 * pulse, 0, Math.PI * 2);
+    mctx.stroke();
+
+    // Inner halo disc
+    mctx.fillStyle = 'rgba(125, 211, 252, 0.18)';
+    mctx.beginPath();
+    mctx.arc(rx, ry, 6, 0, Math.PI * 2);
     mctx.fill();
+
+    // Arrow — points where the rocket is flying
+    mctx.save();
+    mctx.translate(rx, ry);
+    mctx.rotate(rocket.angle);
+    mctx.shadowBlur = 10;
+    mctx.shadowColor = '#7dd3fc';
+    mctx.fillStyle = '#fb923c';
+    mctx.strokeStyle = '#ffffff';
+    mctx.lineWidth = 1;
+    mctx.beginPath();
+    mctx.moveTo(6, 0);
+    mctx.lineTo(-4, -3.5);
+    mctx.lineTo(-2, 0);
+    mctx.lineTo(-4, 3.5);
+    mctx.closePath();
+    mctx.fill();
+    mctx.stroke();
     mctx.shadowBlur = 0;
+    mctx.restore();
   }
 
   // ---------- UTILITIES ----------
