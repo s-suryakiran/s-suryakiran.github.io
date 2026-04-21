@@ -17,11 +17,18 @@
     <!-- =====BOX ICONS===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <!-- =====THREE.JS (for 3D scenes)===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <title>Suryakiran's Portfolio</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
 </head>
 
 <body>
+    <!-- Full-viewport 3D animated background (fixed, behind all sections) -->
+    <div class="hero-canvas-wrapper" aria-hidden="true">
+        <canvas id="hero-canvas"></canvas>
+    </div>
+
     <div class="progress-container">
         <div id="progressbar" class="progress-bar"></div>
     </div>
@@ -165,8 +172,10 @@
                     </div>
                 </div>
 
-                <div>
-                    <img src="assets/img/Skill.png" alt="" class="skills__img">
+                <div class="skills__globe-wrapper">
+                    <div id="skills-globe" role="img"
+                         aria-label="Interactive 3D globe of technical skills. Drag to rotate."></div>
+                    <p class="skills__globe-hint">Drag to rotate</p>
                 </div>
             </div>
         </section>
@@ -488,6 +497,9 @@
 
     <!--===== MAIN JS =====-->
     <script src="assets/js/main.js"></script>
+
+    <!--===== 3D SCENES =====-->
+    <script src="assets/js/three-scenes.js"></script>
 
     <!-- Chatbot Bubble -->
     <div class="chatbot-container">
