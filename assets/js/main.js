@@ -86,23 +86,78 @@ function closeChatbot() {
 
 document.querySelectorAll('.project-popout').forEach(project => {
     project.addEventListener('click', function (event) {
-        event.stopPropagation(); // Prevent triggering document click event
+        // Don't re-trigger while this card's overlay is already open.
         const overlay = this.querySelector('.project-popout-overlay');
-        overlay.classList.add('active');
+        if (overlay.classList.contains('active')) return;
+
+        event.stopPropagation(); // Prevent triggering document click event
+
+        // IMPORTANT: Neutralize the card's 3D tilt + will-change BEFORE the
+        // overlay becomes visible. Otherwise `position: fixed` on the overlay
+        // resolves to the still-transformed card's coordinate system for one
+        // frame — which looks like the popup opening "inside the tile" and
+        // then jumping to the center.
+        this.style.transform = 'none';
+        this.style.willChange = 'auto';
+        const glare = this.querySelector('.project-glare');
+        if (glare) glare.style.background = 'none';
+
+        // Force a synchronous layout pass so the containing-block change
+        // is committed before the animation starts.
+        void this.offsetWidth;
+
+        // Activate on the next frame so the browser has painted the
+        // neutralized card first; the overlay's scale animation then runs
+        // cleanly from the centered viewport position.
+        requestAnimationFrame(() => {
+            overlay.classList.add('active');
+            document.body.classList.add('popout-open');
+        });
     });
 });
+
+/**
+ * Clear the inline `transform`/`will-change` we applied to each card when
+ * opening its overlay, so the 3D tilt is free to take over again on the
+ * next hover.
+ */
+function resetCardInlineStyles() {
+    document.querySelectorAll('.project-popout').forEach(card => {
+        card.style.transform = '';
+        card.style.willChange = '';
+    });
+}
 
 function closeOverlay(event) {
     event.stopPropagation(); // Prevent triggering document click event
     const overlay = event.currentTarget.closest('.project-popout-overlay');
     overlay.classList.remove('active');
+    if (!document.querySelector('.project-popout-overlay.active')) {
+        document.body.classList.remove('popout-open');
+        resetCardInlineStyles();
+    }
 }
 
-// Close the overlay when clicking outside of it
+// Close the overlay when clicking outside of it (including the new backdrop)
 document.addEventListener('click', function (event) {
-    if (!event.target.closest('.project-popout-overlay')) {
+    if (!event.target.closest('.project-popout-overlay') &&
+        !event.target.closest('.project-popout')) {
         document.querySelectorAll('.project-popout-overlay.active').forEach(overlay => {
             overlay.classList.remove('active');
         });
+        document.body.classList.remove('popout-open');
+        resetCardInlineStyles();
+    }
+});
+
+// Dismiss with the Escape key for accessibility
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        const openOverlays = document.querySelectorAll('.project-popout-overlay.active');
+        if (openOverlays.length) {
+            openOverlays.forEach(ov => ov.classList.remove('active'));
+            document.body.classList.remove('popout-open');
+            resetCardInlineStyles();
+        }
     }
 });
