@@ -260,7 +260,10 @@
       title: 'Projects',
       html: () => `
         <h2>Projects</h2>
-        <p class="label">Featured missions — each its own moon</p>
+        <p class="label">
+          Featured missions — each its own moon
+          <button onclick="window.__playMarsClip && window.__playMarsClip()" style="margin-left:0.8rem;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.4);color:#fb923c;font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:0.2rem 0.55rem;cursor:pointer;letter-spacing:0.05em;">▶ replay transmission</button>
+        </p>
         <div class="projects-grid">
           ${PROJECTS.map(p => `
             <div class="project-card">
@@ -406,6 +409,30 @@
   function chips(...items) {
     return items.map(i => `<span class="chip">${i}</span>`).join('');
   }
+
+  // ---------- MARS EASTER EGG (audio) ----------
+  // Drops a clip at assets/audio/mars-botanist.mp3 — site is silent if missing.
+  const MARS_AUDIO_SRC = './assets/audio/mars-botanist.mp3';
+  let marsAudio = null;
+  let marsAudioPlayedOnce = false;
+  try {
+    marsAudio = new Audio(MARS_AUDIO_SRC);
+    marsAudio.preload = 'auto';
+    marsAudio.volume = 0.55;
+    // If the file doesn't exist or can't be decoded, swallow the error.
+    marsAudio.addEventListener('error', () => { marsAudio = null; });
+  } catch (_) { marsAudio = null; }
+
+  function playMarsClip() {
+    if (!marsAudio) return;
+    try {
+      marsAudio.currentTime = 0;
+      const p = marsAudio.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    } catch (_) { /* autoplay policy or missing file — shrug */ }
+  }
+  // Expose for the inline "replay transmission" button in the Mars panel
+  window.__playMarsClip = playMarsClip;
 
   // ---------- COMET /NOW — a bright streak carrying a "right now" note ----------
   const comet = {
@@ -873,10 +900,19 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     // kill rocket velocity softly so you don't fly away while reading
     rocket.vx *= 0.3;
     rocket.vy *= 0.3;
+    // Easter egg: first time you land on Mars, play the clip (if the file exists)
+    if (planet.id === 'mars' && !marsAudioPlayedOnce) {
+      marsAudioPlayedOnce = true;
+      playMarsClip();
+    }
   }
   function closePanel() {
     panel.classList.add('hidden');
     panelOpen = false;
+    // Stop Mars clip if it's still going when the user bails
+    if (marsAudio && !marsAudio.paused) {
+      try { marsAudio.pause(); } catch (_) {}
+    }
   }
 
   // ---------- GAME LOOP ----------
