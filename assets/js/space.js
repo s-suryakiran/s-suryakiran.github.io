@@ -518,6 +518,8 @@
     globeGroup.add(wire);
 
     // Atmospheric glow — additive backface sphere with Fresnel-ish shader
+    // NOTE: clamp the input to pow() with max(0.0, ...) — otherwise GLSL produces
+    // NaN fragments on the far hemisphere which render as a dark halo/ring.
     const atmo = new THREE.Mesh(
       new THREE.SphereGeometry(1.18, 64, 64),
       new THREE.ShaderMaterial({
@@ -530,14 +532,17 @@
         fragmentShader: `
           varying vec3 vNormal;
           void main() {
-            float intensity = pow(0.75 - dot(vNormal, vec3(0, 0, 1.0)), 2.5);
+            float d = dot(vNormal, vec3(0.0, 0.0, 1.0));
+            float intensity = pow(max(0.0, 0.75 - d), 2.5);
             gl_FragColor = vec4(0.49, 0.83, 0.99, 1.0) * intensity;
           }`,
         blending: THREE.AdditiveBlending,
         side: THREE.BackSide,
         transparent: true,
+        depthWrite: false,
       })
     );
+    atmo.renderOrder = 1;
     scene.add(atmo);
 
     // --- lat/lon → 3D ---
@@ -572,45 +577,71 @@
       globeGroup.add(halo);
 
       // City label as a sprite
+      // NOTE: sits at radius 1.28 — OUTSIDE the atmosphere sphere (1.18), otherwise
+      // labels z-fight with the atmo fragments and "break" as the globe rotates.
       const label = makeCityLabel(THREE, city);
-      const labelPos = latLonTo3D(city.lat, city.lon, 1.18);
+      const labelPos = latLonTo3D(city.lat, city.lon, 1.28);
       label.position.copy(labelPos);
+      label.renderOrder = 2;
       globeGroup.add(label);
 
       pinObjs.push({ city, pin, halo, label });
     }
 
-    // --- arcs between consecutive cities ---
+    // --- arcs between cities ---
+    // Explicit pairs, not "consecutive in array" — Raleigh was a summer internship
+    // BRANCHING OFF from NYU, not a step between NYC and Salt Lake City. The real
+    // career path is Chennai → NYC → SLC, with Raleigh as a NYC side trip.
     // Arc height scales with angular distance so long hops arch far off the sphere
     // and don't get occluded by the planet itself.
+    const cityIdx = Object.fromEntries(CITIES.map((c, i) => [c.name, i]));
+    const ARCS = [
+      { from: 'Madurai',   to: 'Singapore',      kind: 'main' },
+      { from: 'Singapore', to: 'Chennai',        kind: 'main' },
+      { from: 'Chennai',   to: 'New York',       kind: 'main' }, // cross-continent, auto-purple
+      { from: 'New York',  to: 'Salt Lake City', kind: 'main' }, // the one that matters
+      { from: 'New York',  to: 'Raleigh',        kind: 'side' }, // summer intern detour
+    ];
+
     const travelers = []; // pulsing dots that travel along each arc
-    for (let i = 0; i < CITIES.length - 1; i++) {
-      const a = latLonTo3D(CITIES[i].lat, CITIES[i].lon, 1.012);
-      const b = latLonTo3D(CITIES[i + 1].lat, CITIES[i + 1].lon, 1.012);
+    ARCS.forEach((spec, i) => {
+      const ca = CITIES[cityIdx[spec.from]];
+      const cb = CITIES[cityIdx[spec.to]];
+      const a = latLonTo3D(ca.lat, ca.lon, 1.012);
+      const b = latLonTo3D(cb.lat, cb.lon, 1.012);
       const angle = a.angleTo(b);                          // 0 … π
       const arcHeight = 1.0 + 0.55 * angle;                // short = 1.0, antipodal ≈ 2.73
       const mid = a.clone().add(b).multiplyScalar(0.5).normalize().multiplyScalar(arcHeight);
       const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
 
-      // Is this a cross-continent hop? Highlight it in purple + make the tube a touch thicker.
+      // Visual language:
+      //   - cross-continent main arcs = thicker + purple
+      //   - within-continent main arcs = cyan
+      //   - side trips (Raleigh)       = dimmer/thinner cyan
       const isLongHop = angle > 0.6; // ~34°+ geodesic — covers the India↔USA arc
-      const color = isLongHop ? 0xc084fc : 0x7dd3fc;
-      const radius = isLongHop ? 0.006 : 0.0045;
+      const isSide    = spec.kind === 'side';
+      const color  = isSide ? 0x7dd3fc : (isLongHop ? 0xc084fc : 0x7dd3fc);
+      const radius = isSide ? 0.003  : (isLongHop ? 0.006    : 0.0045);
+      const opacity = isSide ? 0.55 : 0.85;
 
       const tube = new THREE.Mesh(
         new THREE.TubeGeometry(curve, 80, radius, 8, false),
-        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.85 })
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity })
       );
       globeGroup.add(tube);
 
       // Travelling glow dot — a visual signal the arc actually exists and shows direction
       const dot = new THREE.Mesh(
-        new THREE.SphereGeometry(0.015, 12, 12),
-        new THREE.MeshBasicMaterial({ color: isLongHop ? 0xe8ecff : 0xfff2b0, transparent: true, opacity: 0.95 })
+        new THREE.SphereGeometry(isSide ? 0.011 : 0.015, 12, 12),
+        new THREE.MeshBasicMaterial({
+          color: isLongHop ? 0xe8ecff : 0xfff2b0,
+          transparent: true,
+          opacity: isSide ? 0.7 : 0.95,
+        })
       );
       globeGroup.add(dot);
       travelers.push({ curve, dot, offset: i * 0.17, speed: 0.00035 + Math.random() * 0.00015 });
-    }
+    });
 
     // --- stars in the background ---
     {
@@ -684,6 +715,10 @@
     if (loading) loading.style.display = 'none';
 
     // --- render loop ---
+    // Reusable scratch vectors so the tick doesn't allocate 60× per second
+    const _camDir = new THREE.Vector3();
+    const _pinWorld = new THREE.Vector3();
+    const _toPin = new THREE.Vector3();
     let raf = 0;
     let pulseT = 0;
     function tick(t) {
@@ -692,11 +727,24 @@
       if (!autoRot && t > autoRotResume) autoRot = true;
       if (autoRot) globeGroup.rotation.y += 0.0018;
 
-      // halo pulse
+      // Camera forward vector (points away from the camera, into the scene)
+      camera.getWorldDirection(_camDir);
+
+      // halo pulse + label facing-camera fade
       for (const po of pinObjs) {
         const s = 1 + 0.25 * Math.sin(pulseT * 2 + po.city.lat * 0.1);
         po.halo.scale.setScalar(s);
         po.halo.material.opacity = 0.18 + 0.1 * Math.sin(pulseT * 2 + po.city.lat * 0.1);
+
+        // Fade the label when its pin rotates onto the far hemisphere.
+        // A pin is "facing the camera" when the vector from the earth centre to
+        // the pin points in the opposite direction to the camera's forward.
+        po.pin.getWorldPosition(_pinWorld);
+        _toPin.copy(_pinWorld).normalize();
+        const facing = -_toPin.dot(_camDir); // 1 = dead-centre, -1 = directly behind
+        const alpha = Math.max(0, Math.min(1, (facing - 0.1) * 2.2));
+        po.label.material.opacity = alpha;
+        po.label.visible = alpha > 0.02;
       }
 
       // Travellers — glow dots ride along each arc
