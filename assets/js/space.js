@@ -78,14 +78,14 @@
       title: 'Welcome, Traveller',
       html: () => `
         <h2>Suryakiran Sureshkumar</h2>
-        <p class="label">Analyst, Software Engineer · ex-MLE · New York</p>
+        <p class="label">Analyst, Software Engineer · ex-MLE · Salt Lake City</p>
         <p>You’ve just entered my galactic portfolio. Each orbiting world holds a part of my story — about me, my toolkit, my projects, my experience.</p>
         <p>Point your rocket, burn thrusters, and land on any planet to read. The sun you’re standing on? That’s me. Call me <b>Surya</b>.</p>
         <ul>
           <li><b>Analyst, Software Engineer</b> @ Goldman Sachs — since Sep 2024</li>
           <li><b>M.S. Computer Science</b> @ NYU Courant · May 2024</li>
           <li><b>Ex-MLE</b> @ Tiger Analytics · lead founding engineer on a no-code DS platform</li>
-          <li>From Madurai 🌴 → New York 🗽 · into LLMs, distributed systems, and the cosmos 🪐</li>
+          <li>From Madurai 🌴 → New York 🗽 → Salt Lake City 🏔 · into LLMs, distributed systems, and the cosmos 🪐</li>
         </ul>
       `
     },
@@ -96,8 +96,8 @@
       html: () => `
         <h2>About</h2>
         <p class="label">Hey there — I'm Surya 👋</p>
-        <p>I'm a guy fascinated by the endless possibilities of technology. My journey started in the vibrant city of <b>Madurai, India</b>, and now I'm navigating the exciting tech landscape of <b>New York</b>.</p>
-        <p>Today I'm an <b>Analyst, Software Engineer at Goldman Sachs</b>, building a risk-analysis platform that handles <b>16M+ daily requests</b> at <b>99.99% uptime</b>. Before this I finished my <b>M.S. in Computer Science at NYU's Courant Institute</b>, where I also TA'd four courses across computer vision, probability, and linear algebra.</p>
+        <p>I'm a guy fascinated by the endless possibilities of technology. My journey started in the vibrant city of <b>Madurai, India</b>, and has since carried me through New York and out to <b>Salt Lake City</b>, where I live today — mountains outside the window, fintech on the screen.</p>
+        <p>Today I'm an <b>Analyst, Software Engineer at Goldman Sachs</b> (Salt Lake City office), building a risk-analysis platform that handles <b>16M+ daily requests</b> at <b>99.99% uptime</b>. Before Salt Lake, I finished my <b>M.S. in Computer Science at NYU's Courant Institute</b> in New York, where I also TA'd four courses across computer vision, probability, and linear algebra.</p>
         <p>Before the US I was a <b>Machine Learning Engineer at Tiger Analytics</b>, where I was the lead founding engineer on a no-code data-science platform — a project I still talk about with my hands.</p>
         <h3>What gets me up in the morning</h3>
         <p>Puzzles. Especially the ones that involve data, code, and real-world constraints. Some days I'm knee-deep in a model; other days I'm wiring together distributed services. The thrill of turning complex issues into elegant, user-friendly solutions is what keeps me going.</p>
@@ -106,68 +106,22 @@
         <p>If you're into the latest AI trends, need a hand on a software project, or just want to talk tech over coffee — beam a message from Neptune. Let's make something awesome together.</p>
 
         <h3>The journey so far</h3>
-        <p class="label">Madurai → Singapore → Chennai → Raleigh → New York</p>
-        <svg viewBox="0 0 500 230" style="width:100%;height:auto;display:block;background:linear-gradient(180deg,rgba(10,12,30,0.7),rgba(5,7,20,0.9));border:1px solid rgba(125,211,252,0.2);border-radius:6px;margin-top:0.6rem" aria-label="Map showing Suryakiran's career journey">
-          <defs>
-            <radialGradient id="pinGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#fb923c" stop-opacity="0.6"/>
-              <stop offset="100%" stop-color="#fb923c" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <!-- lat/lon grid -->
-          <g stroke="rgba(125,211,252,0.08)" stroke-width="0.6" fill="none">
-            <line x1="0" y1="115" x2="500" y2="115"/>
-            <line x1="0" y1="57" x2="500" y2="57"/>
-            <line x1="0" y1="172" x2="500" y2="172"/>
-            <line x1="125" y1="0" x2="125" y2="230"/>
-            <line x1="250" y1="0" x2="250" y2="230"/>
-            <line x1="375" y1="0" x2="375" y2="230"/>
-          </g>
-          <!-- continent silhouettes (very simplified — just hinting) -->
-          <g fill="rgba(125,211,252,0.06)" stroke="rgba(125,211,252,0.18)" stroke-width="0.6">
-            <!-- North America -->
-            <path d="M50,40 L160,36 L170,90 L150,110 L110,105 L95,90 L70,80 Z"/>
-            <!-- South America -->
-            <path d="M140,115 L170,118 L172,175 L150,180 L138,150 Z"/>
-            <!-- Europe/Africa -->
-            <path d="M235,45 L290,48 L295,170 L270,185 L245,170 L238,90 Z"/>
-            <!-- Asia -->
-            <path d="M300,35 L420,40 L430,90 L400,110 L370,108 L340,100 L310,80 Z"/>
-            <!-- Australia -->
-            <path d="M400,150 L440,152 L438,175 L408,176 Z"/>
-          </g>
-          <!-- route -->
-          <path d="M358,107 L394,118 L361,102 L141,72 L147,66" fill="none" stroke="#7dd3fc" stroke-width="1.6" stroke-dasharray="5 5" stroke-linecap="round" opacity="0.85">
-            <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.4s" repeatCount="indefinite"/>
-          </path>
-          <!-- pins -->
-          <g>
-            <circle cx="358" cy="107" r="10" fill="url(#pinGlow)"/>
-            <circle cx="394" cy="118" r="10" fill="url(#pinGlow)"/>
-            <circle cx="361" cy="102" r="10" fill="url(#pinGlow)"/>
-            <circle cx="141" cy="72" r="10" fill="url(#pinGlow)"/>
-            <circle cx="147" cy="66" r="12" fill="url(#pinGlow)"/>
-            <circle cx="358" cy="107" r="3.2" fill="#fb923c" stroke="#fff" stroke-width="0.8"/>
-            <circle cx="394" cy="118" r="3.2" fill="#fb923c" stroke="#fff" stroke-width="0.8"/>
-            <circle cx="361" cy="102" r="3.2" fill="#fb923c" stroke="#fff" stroke-width="0.8"/>
-            <circle cx="141" cy="72" r="3.2" fill="#fb923c" stroke="#fff" stroke-width="0.8"/>
-            <circle cx="147" cy="66" r="4" fill="#7dd3fc" stroke="#fff" stroke-width="1"/>
-          </g>
-          <!-- labels -->
-          <g fill="#e8ecff" font-family="'JetBrains Mono', monospace" font-size="8.5">
-            <text x="358" y="128" text-anchor="middle">Madurai</text>
-            <text x="358" y="139" text-anchor="middle" fill="rgba(232,236,255,0.55)" font-size="7">home · college</text>
-            <text x="400" y="137" text-anchor="start">Singapore</text>
-            <text x="400" y="147" text-anchor="start" fill="rgba(232,236,255,0.55)" font-size="7">NUS · HPE '19</text>
-            <text x="361" y="95" text-anchor="middle">Chennai</text>
-            <text x="361" y="86" text-anchor="middle" fill="rgba(232,236,255,0.55)" font-size="7">Tiger Analytics '21</text>
-            <text x="141" y="60" text-anchor="middle">Raleigh</text>
-            <text x="141" y="51" text-anchor="middle" fill="rgba(232,236,255,0.55)" font-size="7">Promantus '23</text>
-            <text x="153" y="58" text-anchor="start" fill="#7dd3fc">New York</text>
-            <text x="153" y="47" text-anchor="start" fill="rgba(125,211,252,0.7)" font-size="7">NYU · Goldman · now</text>
-          </g>
-        </svg>
-        <p style="color:var(--ink-dim);font-size:0.85rem;margin-top:0.4rem">Five cities, three continents, one extremely patient suitcase.</p>
+        <p class="label">Madurai → Singapore → Chennai → New York → Raleigh → Salt Lake City · <span style="color:var(--ink-dim)">drag to spin · pins mark every workplace</span></p>
+        <div id="globe-3d" style="position:relative;width:100%;height:420px;background:radial-gradient(ellipse at center, rgba(10,15,40,0.9), rgba(3,3,11,1));border:1px solid rgba(125,211,252,0.2);border-radius:6px;margin-top:0.6rem;overflow:hidden;cursor:grab;">
+          <div class="globe-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.15em;">[booting globe…]</div>
+          <div class="globe-fallback" style="display:none;position:absolute;inset:0;padding:1.2rem;overflow:auto;">
+            <p style="color:var(--accent-3);font-family:'JetBrains Mono',monospace;font-size:0.75rem;margin-bottom:0.8rem">[ 3D globe unavailable — offline or WebGL disabled. City list follows. ]</p>
+            <ul style="list-style:none;padding:0;margin:0;display:grid;gap:0.4rem;font-size:0.85rem;">
+              <li><b style="color:var(--accent-3)">Madurai</b> — Thiagarajar '17–'21 · BSNL '18 · Research '19–'21</li>
+              <li><b style="color:var(--accent-3)">Singapore</b> — NUS · HPE '19</li>
+              <li><b style="color:var(--accent-3)">Chennai</b> — Tiger Analytics '21–'22</li>
+              <li><b style="color:var(--accent-3)">New York</b> — NYU '22–'24</li>
+              <li><b style="color:var(--accent-3)">Raleigh</b> — Promantus '23 (summer internship during NYU)</li>
+              <li><b style="color:var(--accent)">Salt Lake City</b> — Goldman Sachs '24–now</li>
+            </ul>
+          </div>
+        </div>
+        <p style="color:var(--ink-dim);font-size:0.85rem;margin-top:0.6rem">Six cities, three continents, one extremely patient suitcase. Drag the globe to spin · scroll to zoom.</p>
       `
     },
     {
@@ -206,7 +160,7 @@
         <h2>Missions Flown</h2>
         <p class="label">The flight log — most recent first</p>
 
-        <h3>Analyst, Software Engineer — Goldman Sachs <span style="color:var(--ink-dim);font-weight:400;font-size:0.85rem">· Sep 2024 → Present · New York</span></h3>
+        <h3>Analyst, Software Engineer — Goldman Sachs <span style="color:var(--ink-dim);font-weight:400;font-size:0.85rem">· Sep 2024 → Present · Salt Lake City</span></h3>
         <ul>
           <li>Building a <b>risk-analysis platform</b> that automates trade margining from legal agreements — powers margin-call workflows at <b>16M+ requests / day, 99.99% uptime</b>. Stack: Java, Spring Boot, Kubernetes, MySQL.</li>
           <li>Wrote a <b>Spark / PySpark refiner</b> ingesting <b>3M+ records / day</b> from heterogeneous upstream feeds into a unified margin schema — the backbone behind the risk engine's nightly reconciliation.</li>
@@ -321,7 +275,7 @@
         <h2 style="margin-top:2rem">Beyond the Code</h2>
         <p class="label">The things LinkedIn doesn't tell you</p>
         <ul>
-          <li><b>Origin story</b> — grew up in <b>Madurai, India</b>; now navigating the NYC tech scene. Native in English and Tamil.</li>
+          <li><b>Origin story</b> — grew up in <b>Madurai, India</b>; did grad school in NYC; now based in <b>Salt Lake City</b>, mountains out the window. Native in English and Tamil.</li>
           <li><b>Proud moment</b> — the <b>Phishing-Site Detection</b> app I built as an NUS intern won the <b>Best Project Award</b>. My first "maybe I actually belong here" moment.</li>
           <li><b>Another one</b> — watching the <b>No-Code DS platform</b> I led at Tiger Analytics go live and get adopted across the firm.</li>
           <li><b>Algorithms for fun</b> — I keep a running <a href="https://github.com/s-suryakiran/leet-code-problems" target="_blank">LeetCode log on GitHub</a>. Coffee + a hard problem = my ideal weekend.</li>
@@ -490,6 +444,428 @@
 
   // Prime comet position so the first frame has sensible velocity
   updateComet(0.016);
+
+  // ---------- 3D GLOBE (Mercury travel-log) ----------
+  // Every city with a workplace, in chronological order
+  const CITIES = [
+    { name: 'Madurai',        lat:  9.9252, lon:  78.1198, role: "Thiagarajar '17–'21 · BSNL '18 · Research '19–'21", color: 0xfb923c },
+    { name: 'Singapore',      lat:  1.3521, lon: 103.8198, role: "NUS · HPE '19",                                     color: 0xfb923c },
+    { name: 'Chennai',        lat: 13.0827, lon:  80.2707, role: "Tiger Analytics '21–'22",                           color: 0xfb923c },
+    { name: 'New York',       lat: 40.7128, lon: -74.0060, role: "NYU '22–'24",                                       color: 0xfb923c },
+    { name: 'Raleigh',        lat: 35.7796, lon: -78.6382, role: "Promantus '23 (summer)",                            color: 0xfb923c },
+    { name: 'Salt Lake City', lat: 40.7608, lon:-111.8910, role: "Goldman Sachs '24–now",                             color: 0x7dd3fc, current: true },
+  ];
+
+  let globe3d = null; // { dispose(): void, raf, etc. }
+
+  async function initGlobe(container) {
+    if (!container) return;
+    const loading = container.querySelector('.globe-loading');
+    const fallback = container.querySelector('.globe-fallback');
+
+    let THREE;
+    try {
+      THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js');
+    } catch (err) {
+      // Couldn't fetch three.js — reveal the text fallback
+      if (loading) loading.style.display = 'none';
+      if (fallback) fallback.style.display = 'block';
+      console.warn('Globe: Three.js failed to load —', err);
+      return;
+    }
+
+    const W = container.clientWidth;
+    const H = container.clientHeight;
+
+    // Detect WebGL availability
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch (err) {
+      if (loading) loading.style.display = 'none';
+      if (fallback) fallback.style.display = 'block';
+      return;
+    }
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.domElement.style.display = 'block';
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+    camera.position.set(0, 0.15, 3.1);
+    camera.lookAt(0, 0, 0);
+
+    // --- Build equirectangular earth texture on a 2D canvas ---
+    const earthTex = buildEarthCanvasTexture(THREE);
+
+    // Group that holds everything that should rotate together
+    const globeGroup = new THREE.Group();
+    scene.add(globeGroup);
+
+    // Earth sphere
+    const earth = new THREE.Mesh(
+      new THREE.SphereGeometry(1, 96, 96),
+      new THREE.MeshBasicMaterial({ map: earthTex })
+    );
+    globeGroup.add(earth);
+
+    // Wireframe overlay for hologram vibe
+    const wire = new THREE.Mesh(
+      new THREE.SphereGeometry(1.003, 32, 24),
+      new THREE.MeshBasicMaterial({ color: 0x7dd3fc, wireframe: true, transparent: true, opacity: 0.08 })
+    );
+    globeGroup.add(wire);
+
+    // Atmospheric glow — additive backface sphere with Fresnel-ish shader
+    const atmo = new THREE.Mesh(
+      new THREE.SphereGeometry(1.18, 64, 64),
+      new THREE.ShaderMaterial({
+        vertexShader: `
+          varying vec3 vNormal;
+          void main() {
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }`,
+        fragmentShader: `
+          varying vec3 vNormal;
+          void main() {
+            float intensity = pow(0.75 - dot(vNormal, vec3(0, 0, 1.0)), 2.5);
+            gl_FragColor = vec4(0.49, 0.83, 0.99, 1.0) * intensity;
+          }`,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide,
+        transparent: true,
+      })
+    );
+    scene.add(atmo);
+
+    // --- lat/lon → 3D ---
+    function latLonTo3D(lat, lon, r) {
+      const phi = (90 - lat) * Math.PI / 180;
+      const theta = (lon + 180) * Math.PI / 180;
+      return new THREE.Vector3(
+        -r * Math.sin(phi) * Math.cos(theta),
+         r * Math.cos(phi),
+         r * Math.sin(phi) * Math.sin(theta)
+      );
+    }
+
+    // --- pins + halos + labels ---
+    const pinObjs = [];
+    for (const city of CITIES) {
+      const pos = latLonTo3D(city.lat, city.lon, 1.015);
+      const col = new THREE.Color(city.color);
+
+      const pin = new THREE.Mesh(
+        new THREE.SphereGeometry(0.022, 16, 16),
+        new THREE.MeshBasicMaterial({ color: col })
+      );
+      pin.position.copy(pos);
+      globeGroup.add(pin);
+
+      const halo = new THREE.Mesh(
+        new THREE.SphereGeometry(0.05, 16, 16),
+        new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.25 })
+      );
+      halo.position.copy(pos);
+      globeGroup.add(halo);
+
+      // City label as a sprite
+      const label = makeCityLabel(THREE, city);
+      const labelPos = latLonTo3D(city.lat, city.lon, 1.18);
+      label.position.copy(labelPos);
+      globeGroup.add(label);
+
+      pinObjs.push({ city, pin, halo, label });
+    }
+
+    // --- arcs between consecutive cities ---
+    // Arc height scales with angular distance so long hops arch far off the sphere
+    // and don't get occluded by the planet itself.
+    const travelers = []; // pulsing dots that travel along each arc
+    for (let i = 0; i < CITIES.length - 1; i++) {
+      const a = latLonTo3D(CITIES[i].lat, CITIES[i].lon, 1.012);
+      const b = latLonTo3D(CITIES[i + 1].lat, CITIES[i + 1].lon, 1.012);
+      const angle = a.angleTo(b);                          // 0 … π
+      const arcHeight = 1.0 + 0.55 * angle;                // short = 1.0, antipodal ≈ 2.73
+      const mid = a.clone().add(b).multiplyScalar(0.5).normalize().multiplyScalar(arcHeight);
+      const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
+
+      // Is this a cross-continent hop? Highlight it in purple + make the tube a touch thicker.
+      const isLongHop = angle > 0.6; // ~34°+ geodesic — covers the India↔USA arc
+      const color = isLongHop ? 0xc084fc : 0x7dd3fc;
+      const radius = isLongHop ? 0.006 : 0.0045;
+
+      const tube = new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 80, radius, 8, false),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.85 })
+      );
+      globeGroup.add(tube);
+
+      // Travelling glow dot — a visual signal the arc actually exists and shows direction
+      const dot = new THREE.Mesh(
+        new THREE.SphereGeometry(0.015, 12, 12),
+        new THREE.MeshBasicMaterial({ color: isLongHop ? 0xe8ecff : 0xfff2b0, transparent: true, opacity: 0.95 })
+      );
+      globeGroup.add(dot);
+      travelers.push({ curve, dot, offset: i * 0.17, speed: 0.00035 + Math.random() * 0.00015 });
+    }
+
+    // --- stars in the background ---
+    {
+      const sgeo = new THREE.BufferGeometry();
+      const sv = new Float32Array(800 * 3);
+      for (let i = 0; i < 800; i++) {
+        const r = 30 + Math.random() * 20;
+        const t = Math.random() * Math.PI * 2;
+        const p = Math.acos(2 * Math.random() - 1);
+        sv[i * 3]     = r * Math.sin(p) * Math.cos(t);
+        sv[i * 3 + 1] = r * Math.cos(p);
+        sv[i * 3 + 2] = r * Math.sin(p) * Math.sin(t);
+      }
+      sgeo.setAttribute('position', new THREE.BufferAttribute(sv, 3));
+      const stars = new THREE.Points(sgeo, new THREE.PointsMaterial({ color: 0xe8ecff, size: 0.12, sizeAttenuation: true, transparent: true, opacity: 0.55 }));
+      scene.add(stars);
+    }
+
+    // Initial rotation — show India/Asia roughly centred
+    globeGroup.rotation.y = -Math.PI * 0.55;
+    globeGroup.rotation.x = 0.25;
+
+    // --- interaction: drag, wheel zoom, auto-rotate ---
+    let drag = { active: false, x: 0, y: 0 };
+    let autoRot = true;
+    let autoRotResume = 0;
+
+    const onDown = (e) => {
+      drag.active = true;
+      drag.x = e.clientX;
+      drag.y = e.clientY;
+      autoRot = false;
+      autoRotResume = performance.now() + 2500;
+      container.style.cursor = 'grabbing';
+    };
+    const onMove = (e) => {
+      if (!drag.active) return;
+      const dx = e.clientX - drag.x;
+      const dy = e.clientY - drag.y;
+      globeGroup.rotation.y += dx * 0.006;
+      globeGroup.rotation.x = Math.max(-1.1, Math.min(1.1, globeGroup.rotation.x + dy * 0.005));
+      drag.x = e.clientX;
+      drag.y = e.clientY;
+    };
+    const onUp = () => {
+      drag.active = false;
+      container.style.cursor = 'grab';
+    };
+    const onWheel = (e) => {
+      e.preventDefault();
+      camera.position.z = Math.max(1.8, Math.min(5.5, camera.position.z + e.deltaY * 0.002));
+    };
+
+    renderer.domElement.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
+
+    // Resize on panel width change
+    const onResize = () => {
+      const nw = container.clientWidth;
+      const nh = container.clientHeight;
+      if (!nw || !nh) return;
+      camera.aspect = nw / nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw, nh);
+    };
+    window.addEventListener('resize', onResize);
+
+    // Remove the loading shim now that everything is ready
+    if (loading) loading.style.display = 'none';
+
+    // --- render loop ---
+    let raf = 0;
+    let pulseT = 0;
+    function tick(t) {
+      raf = requestAnimationFrame(tick);
+      pulseT += 0.016;
+      if (!autoRot && t > autoRotResume) autoRot = true;
+      if (autoRot) globeGroup.rotation.y += 0.0018;
+
+      // halo pulse
+      for (const po of pinObjs) {
+        const s = 1 + 0.25 * Math.sin(pulseT * 2 + po.city.lat * 0.1);
+        po.halo.scale.setScalar(s);
+        po.halo.material.opacity = 0.18 + 0.1 * Math.sin(pulseT * 2 + po.city.lat * 0.1);
+      }
+
+      // Travellers — glow dots ride along each arc
+      for (const tr of travelers) {
+        tr.offset = (tr.offset + tr.speed * 16.67) % 1;
+        const pos = tr.curve.getPointAt(tr.offset);
+        tr.dot.position.copy(pos);
+      }
+
+      renderer.render(scene, camera);
+    }
+    raf = requestAnimationFrame(tick);
+
+    // Expose disposal
+    globe3d = {
+      dispose() {
+        cancelAnimationFrame(raf);
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
+        window.removeEventListener('resize', onResize);
+        renderer.domElement.removeEventListener('pointerdown', onDown);
+        renderer.domElement.removeEventListener('wheel', onWheel);
+        // dispose geometries / materials / textures
+        scene.traverse(obj => {
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+            else obj.material.dispose();
+          }
+        });
+        earthTex.dispose();
+        renderer.dispose();
+        if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+      }
+    };
+  }
+
+  function disposeGlobe() {
+    if (globe3d) { try { globe3d.dispose(); } catch (_) {} globe3d = null; }
+  }
+
+  // Build a stylised hologram earth texture on a 2D canvas.
+  // No external image, no copyright issues — rough hand-authored continent polygons.
+  function buildEarthCanvasTexture(THREE) {
+    const W = 2048, H = 1024;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const g = c.getContext('2d');
+
+    // Ocean — deep navy with a subtle vertical gradient (darker at poles)
+    const oceanGrad = g.createLinearGradient(0, 0, 0, H);
+    oceanGrad.addColorStop(0,   '#030613');
+    oceanGrad.addColorStop(0.5, '#0a1a33');
+    oceanGrad.addColorStop(1,   '#030613');
+    g.fillStyle = oceanGrad;
+    g.fillRect(0, 0, W, H);
+
+    const p = (lon, lat) => [((lon + 180) / 360) * W, ((90 - lat) / 180) * H];
+
+    // Simplified continent polygons — lon, lat pairs
+    const continents = [
+      // North America (Alaska → US → Mexico)
+      [[-168,65],[-164,71],[-148,71],[-125,69],[-95,74],[-82,75],[-64,60],[-55,49],[-65,43],[-72,38],[-80,25],[-97,18],[-106,23],[-115,30],[-122,34],[-124,42],[-130,53],[-141,60],[-154,59],[-168,65]],
+      // Greenland
+      [[-55,60],[-50,70],[-40,83],[-20,82],[-15,75],[-22,62],[-42,60],[-55,60]],
+      // South America
+      [[-80,11],[-75,10],[-60,8],[-50,2],[-38,-5],[-35,-10],[-38,-23],[-48,-28],[-58,-38],[-65,-55],[-72,-52],[-73,-42],[-75,-33],[-73,-20],[-78,-4],[-81,3],[-80,11]],
+      // Europe (mainland + UK approximation)
+      [[-10,36],[-8,43],[-4,44],[2,43],[8,44],[14,45],[20,42],[28,41],[34,45],[40,48],[42,54],[38,62],[28,66],[15,68],[5,64],[-2,58],[-6,55],[-8,50],[-4,46],[-10,36]],
+      // UK / Ireland rough
+      [[-10,51],[-8,55],[-6,58],[-2,58],[1,54],[-3,50],[-6,50],[-10,51]],
+      // Africa
+      [[-17,14],[-5,15],[10,35],[25,32],[32,31],[35,16],[43,11],[51,12],[48,5],[42,-5],[40,-15],[32,-22],[20,-34],[15,-34],[10,-22],[9,-5],[-2,5],[-10,6],[-17,14]],
+      // Arabia
+      [[35,30],[48,28],[55,22],[53,13],[44,12],[38,18],[35,30]],
+      // Asia (huge — Russia + China + SE Asia + India)
+      [[30,45],[40,48],[55,51],[70,55],[85,60],[100,62],[120,65],[140,70],[160,68],[175,66],[180,60],[170,50],[150,45],[135,36],[125,28],[115,22],[105,18],[100,11],[97,5],[92,12],[85,22],[77,8],[72,17],[67,24],[58,25],[48,36],[40,40],[30,45]],
+      // Japan (island blob)
+      [[135,33],[140,38],[143,43],[141,45],[135,38],[132,33],[135,33]],
+      // Indonesia / SE Asia archipelago
+      [[95,-2],[105,1],[112,-3],[120,-8],[130,-8],[135,-4],[142,-3],[140,-8],[122,-10],[110,-9],[100,-3],[95,-2]],
+      // Australia
+      [[113,-22],[122,-16],[132,-12],[141,-10],[145,-14],[153,-23],[150,-36],[140,-38],[130,-32],[120,-34],[115,-33],[114,-26],[113,-22]],
+      // New Zealand
+      [[166,-46],[172,-41],[176,-39],[178,-42],[172,-46],[167,-47],[166,-46]],
+      // Antarctica — band at bottom
+      [[-180,-78],[-90,-75],[0,-78],[90,-72],[180,-78],[180,-90],[-180,-90],[-180,-78]],
+    ];
+
+    g.save();
+    g.fillStyle = 'rgba(32, 90, 120, 0.9)';
+    g.strokeStyle = 'rgba(125, 211, 252, 0.7)';
+    g.lineWidth = 1.4;
+    g.shadowBlur = 14;
+    g.shadowColor = 'rgba(125, 211, 252, 0.35)';
+    for (const poly of continents) {
+      g.beginPath();
+      poly.forEach((pt, i) => {
+        const [x, y] = p(pt[0], pt[1]);
+        if (i === 0) g.moveTo(x, y); else g.lineTo(x, y);
+      });
+      g.closePath();
+      g.fill();
+      g.stroke();
+    }
+    g.restore();
+
+    // Lat/lon graticule
+    g.strokeStyle = 'rgba(125, 211, 252, 0.10)';
+    g.lineWidth = 1;
+    for (let lat = -60; lat <= 60; lat += 15) {
+      const y = ((90 - lat) / 180) * H;
+      g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke();
+    }
+    for (let lon = -180; lon <= 180; lon += 15) {
+      const x = ((lon + 180) / 360) * W;
+      g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke();
+    }
+
+    // Equator
+    g.strokeStyle = 'rgba(192, 132, 252, 0.35)';
+    g.lineWidth = 2;
+    g.beginPath(); g.moveTo(0, H / 2); g.lineTo(W, H / 2); g.stroke();
+
+    const tex = new THREE.CanvasTexture(c);
+    tex.anisotropy = 8;
+    tex.needsUpdate = true;
+    return tex;
+  }
+
+  function makeCityLabel(THREE, city) {
+    const c = document.createElement('canvas');
+    c.width = 360; c.height = 88;
+    const g = c.getContext('2d');
+    // background plate
+    g.fillStyle = 'rgba(5, 8, 20, 0.88)';
+    g.strokeStyle = city.current ? 'rgba(125,211,252,0.65)' : 'rgba(251,146,60,0.55)';
+    g.lineWidth = 2;
+    const pad = 6;
+    roundRect(g, pad, pad, c.width - pad*2, c.height - pad*2, 8);
+    g.fill();
+    g.stroke();
+    // text
+    g.textAlign = 'center';
+    g.font = '700 26px "JetBrains Mono", monospace';
+    g.fillStyle = city.current ? '#7dd3fc' : '#fb923c';
+    g.fillText(city.name, c.width / 2, 38);
+    g.font = '500 14px "JetBrains Mono", monospace';
+    g.fillStyle = 'rgba(232, 236, 255, 0.8)';
+    g.fillText(city.role, c.width / 2, 62);
+
+    const tex = new THREE.CanvasTexture(c);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
+    const sprite = new THREE.Sprite(mat);
+    // Roughly 0.6 wide in world units; aspect matches canvas
+    const aspect = c.width / c.height;
+    sprite.scale.set(0.55 * aspect * 0.35, 0.35 * 0.55, 1);
+    return sprite;
+  }
+
+  function roundRect(g, x, y, w, h, r) {
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  }
 
   // ---------- STATE ----------
   const rocket = {
@@ -745,7 +1121,7 @@
     whoami: () => {
       termPrint(`<span class="ok">suryakiran</span> · Analyst, Software Engineer @ Goldman Sachs · ex-MLE @ Tiger Analytics
 M.S. CS, NYU Courant (2024) · B.E. CS, Thiagarajar (2021)
-Madurai → Singapore → Chennai → Raleigh → <span class="ok">New York</span>
+Madurai → Singapore → Chennai → New York → Raleigh → <span class="ok">Salt Lake City</span>
 into: LLMs, retrieval, distributed systems, and the cosmos.`);
     },
     about: () => { closeTerminal(); const p = PLANETS.find(x => x.id === 'mercury'); openPanel(p); },
@@ -905,6 +1281,14 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       marsAudioPlayedOnce = true;
       playMarsClip();
     }
+    // Boot the 3D globe when landing on Mercury (About)
+    if (planet.id === 'mercury') {
+      const container = panelContent.querySelector('#globe-3d');
+      if (container) {
+        // Wait a frame so the panel is laid out and clientWidth/Height are real
+        requestAnimationFrame(() => initGlobe(container));
+      }
+    }
   }
   function closePanel() {
     panel.classList.add('hidden');
@@ -913,6 +1297,8 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     if (marsAudio && !marsAudio.paused) {
       try { marsAudio.pause(); } catch (_) {}
     }
+    // Tear down the globe if it's running
+    disposeGlobe();
   }
 
   // ---------- GAME LOOP ----------
