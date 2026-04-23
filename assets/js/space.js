@@ -22,6 +22,25 @@
 
   let W = 0, H = 0, DPR = 1;
 
+  // ---------- MOBILE "ROCKET-UP" CAMERA MODE ----------
+  // On touch devices the joystick is much easier to use when the rocket stays
+  // visually fixed (centred + pointing up on screen) and the world rotates
+  // around it. On desktop we keep the classic "rocket turns, world stays" feel
+  // because the keyboard gives you precise heading control.
+  //
+  // Detection: any coarse pointer OR the same 768px breakpoint that shows the
+  // on-screen joystick in CSS. Re-evaluated on resize / orientation change.
+  let mobileMode = false;
+  function recomputeMobileMode() {
+    mobileMode = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+                 window.innerWidth <= 768;
+  }
+  // viewRotation() returns the angle (radians) to rotate the world by so that
+  // the rocket's heading vector points "up" on screen. 0 on desktop.
+  function viewRotation() {
+    return mobileMode ? (-rocket.angle - Math.PI / 2) : 0;
+  }
+
   function resize() {
     DPR = Math.min(window.devicePixelRatio || 1, 2);
     W = window.innerWidth;
@@ -36,8 +55,10 @@
     mini.width = ms * DPR;
     mini.height = ms * DPR;
     mctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    recomputeMobileMode();
   }
   window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', recomputeMobileMode);
 
   // ---------- WORLD DATA ----------
   const PROJECTS = [
@@ -1417,27 +1438,38 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       }
     } else {
       // ---- MANUAL CONTROL ----
-      const rotSpeed = 2.8;
-      if (keys.left || stickVec.x < -0.15) rocket.angle -= rotSpeed * dt * (stickVec.x < 0 ? Math.abs(stickVec.x) : 1);
-      if (keys.right || stickVec.x > 0.15) rocket.angle += rotSpeed * dt * (stickVec.x > 0 ? Math.abs(stickVec.x) : 1);
+      // Rotation: slightly slower on mobile because the whole world swings
+      // (rocket-up mode), which reads more intense than just the ship turning.
+      const rotSpeed = mobileMode ? 2.1 : 2.8;
+      if (keys.left)  rocket.angle -= rotSpeed * dt;
+      if (keys.right) rocket.angle += rotSpeed * dt;
+      if (stickVec.x < -0.15) rocket.angle -= rotSpeed * dt * Math.abs(stickVec.x);
+      if (stickVec.x >  0.15) rocket.angle += rotSpeed * dt * stickVec.x;
 
-      // Thrust (W/Up or stick-up)
-      const stickForward = stickVec.y < -0.15 ? -stickVec.y : 0;
-      const stickReverse = stickVec.y >  0.15 ?  stickVec.y : 0;
+      // Thrust — stick acts as a throttle, not a bonus on top of base thrust.
+      //   - desktop key  : 260 base (480 with Shift boost)
+      //   - mobile stick : 260 * stickMagnitude (so full push ≈ desktop tap,
+      //                    NOT desktop boost — old code stacked them and
+      //                    pushed you to 480 on any significant stick nudge)
+      const stickForward = stickVec.y < -0.15 ? -stickVec.y : 0; // 0..1
+      const stickReverse = stickVec.y >  0.15 ?  stickVec.y : 0; // 0..1
       rocket.thrusting = !!(keys.up || stickForward > 0);
       rocket.boosting = !!keys.boost;
 
-      const thrust = rocket.thrusting ? (rocket.boosting ? 480 : 260) : 0;
-      const forward = thrust + stickForward * 220;
+      let forward = 0;
+      if (keys.up)             forward = rocket.boosting ? 480 : 260;
+      else if (stickForward > 0) forward = 260 * stickForward;
+
       if (forward > 0) {
         rocket.vx += Math.cos(rocket.angle) * forward * dt;
         rocket.vy += Math.sin(rocket.angle) * forward * dt;
         for (let i = 0; i < (rocket.boosting ? 3 : 2); i++) spawnThrustParticle();
       }
-      // Reverse (S/Down) — gentle brake
+      // Reverse (S/Down) — gentle brake; stick magnitude scales it
       if (keys.down || stickReverse > 0) {
-        rocket.vx -= Math.cos(rocket.angle) * 140 * dt * (stickReverse || 1);
-        rocket.vy -= Math.sin(rocket.angle) * 140 * dt * (stickReverse || 1);
+        const rev = keys.down ? 1 : stickReverse;
+        rocket.vx -= Math.cos(rocket.angle) * 140 * dt * rev;
+        rocket.vy -= Math.sin(rocket.angle) * 140 * dt * rev;
       }
     }
 
@@ -1555,7 +1587,18 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     ctx.fillStyle = '#03030b';
     ctx.fillRect(0, 0, W, H);
 
-    // Draw stars (parallax)
+    const vRot = viewRotation();
+
+    // Draw stars (parallax).
+    // On mobile we rotate the starfield around screen center so the sky moves
+    // with the world — otherwise stars stay locked to the device while planets
+    // swing around, which reads as motion sickness territory.
+    ctx.save();
+    if (vRot !== 0) {
+      ctx.translate(W / 2, H / 2);
+      ctx.rotate(vRot);
+      ctx.translate(-W / 2, -H / 2);
+    }
     for (const s of stars) {
       const px = (s.x - camera.x * s.speed) % 4200;
       const py = (s.y - camera.y * s.speed) % 4200;
@@ -1571,10 +1614,15 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       ctx.fill();
     }
     ctx.globalAlpha = 1;
+    ctx.restore();
 
-    // World transform
+    // World transform — on mobile we also rotate around screen center so the
+    // rocket ends up drawn pointing up (rocket draws at world angle, world
+    // rotation of -angle-π/2 composes to -π/2 = screen-up).
     ctx.save();
-    ctx.translate(W / 2 - camera.x, H / 2 - camera.y);
+    ctx.translate(W / 2, H / 2);
+    if (vRot !== 0) ctx.rotate(vRot);
+    ctx.translate(-camera.x, -camera.y);
 
     // Draw orbit rings from sun
     for (const pl of PLANETS) {
@@ -1641,12 +1689,14 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Label
+      // Label — counter-rotate so the text stays upright under mobile view rot
       ctx.save();
+      ctx.translate(nearPlanet.x, nearPlanet.y);
+      ctx.rotate(-viewRotation());
       ctx.fillStyle = '#7dd3fc';
       ctx.font = '600 11px "Space Grotesk", system-ui, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(nearPlanet.name, nearPlanet.x, nearPlanet.y - nearPlanet.r - 22);
+      ctx.fillText(nearPlanet.name, 0, -nearPlanet.r - 22);
       ctx.restore();
     }
 
@@ -1726,15 +1776,20 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       ctx.restore();
     }
 
-    // Label when not very close
+    // Label when not very close.
+    // Counter-rotate so the text stays upright when mobile rocket-up view is on.
     const dCam = Math.hypot(pl.x - camera.x, pl.y - camera.y);
     if (dCam < 1100 && !pl.isSun) {
+      ctx.save();
+      ctx.translate(pl.x, pl.y);
+      ctx.rotate(-viewRotation());
       ctx.globalAlpha = 0.45;
       ctx.fillStyle = '#e8ecff';
       ctx.font = '500 10px "Space Grotesk", system-ui, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(pl.name, pl.x, pl.y + pl.r + 22);
+      ctx.fillText(pl.name, 0, pl.r + 22);
       ctx.globalAlpha = 1;
+      ctx.restore();
     }
 
     ctx.restore();
@@ -1779,15 +1834,19 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     ctx.fill();
     ctx.shadowBlur = 0;
 
-    // Label (only when camera is roughly nearby)
+    // Label (only when camera is roughly nearby). Counter-rotate for mobile.
     const dCam = Math.hypot(comet.x - camera.x, comet.y - camera.y);
     if (dCam < 1600) {
+      ctx.save();
+      ctx.translate(comet.x, comet.y);
+      ctx.rotate(-viewRotation());
       ctx.globalAlpha = 0.9;
       ctx.fillStyle = '#c084fc';
       ctx.font = '600 10px "JetBrains Mono", monospace';
       ctx.textAlign = 'center';
-      ctx.fillText('/NOW', comet.x, comet.y - comet.r - 14);
+      ctx.fillText('/NOW', 0, -comet.r - 14);
       ctx.globalAlpha = 1;
+      ctx.restore();
     }
 
     ctx.restore();
@@ -1869,14 +1928,37 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     const scale = (size / 2) / worldRadius;
     const cx = size / 2;
     const cy = size / 2;
-    // Orbits
+
+    // In rocket-up mobile mode, the whole minimap swings so the rocket sits at
+    // the centre pointing up and planets/orbits rotate around it — matches the
+    // main view so the two never fight each other for the user's orientation.
+    //
+    // Effective world-to-mini mapping used below:
+    //   desktop: (cx + worldX*scale, cy + worldY*scale)   [sun at centre]
+    //   mobile : rotated & translated so rocket is at centre and points up
+    const vRot = viewRotation();
+    const mobile = vRot !== 0;
+    const cosV = Math.cos(vRot), sinV = Math.sin(vRot);
+    // World (wx,wy) → minimap (sx,sy).
+    // In mobile mode: translate rocket to origin → scale → rotate by vRot → re-centre at (cx,cy).
+    const mapX = mobile
+      ? (wx, wy) => cx + ((wx - rocket.x) * scale) * cosV - ((wy - rocket.y) * scale) * sinV
+      : (wx, _wy) => cx + wx * scale;
+    const mapY = mobile
+      ? (wx, wy) => cy + ((wx - rocket.x) * scale) * sinV + ((wy - rocket.y) * scale) * cosV
+      : (_wx, wy) => cy + wy * scale;
+    // Where the sun/world-origin lands on the minimap — used as orbit centre
+    const ox = mapX(0, 0);
+    const oy = mapY(0, 0);
+
+    // Orbits (centred on the sun at world origin)
     mctx.strokeStyle = 'rgba(125, 211, 252, 0.08)';
     mctx.lineWidth = 1;
     for (const pl of PLANETS) {
       if (pl.isSun || pl.isSecret) continue;
       const d = Math.hypot(pl.x, pl.y) * scale;
       mctx.beginPath();
-      mctx.arc(cx, cy, d, 0, Math.PI * 2);
+      mctx.arc(ox, oy, d, 0, Math.PI * 2);
       mctx.stroke();
     }
     // Planets
@@ -1884,16 +1966,16 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       if (pl.isSecret) continue;
       mctx.fillStyle = pl.color;
       mctx.beginPath();
-      mctx.arc(cx + pl.x * scale, cy + pl.y * scale, pl.isSun ? 4 : 2.5, 0, Math.PI * 2);
+      mctx.arc(mapX(pl.x, pl.y), mapY(pl.x, pl.y), pl.isSun ? 4 : 2.5, 0, Math.PI * 2);
       mctx.fill();
     }
     // Comet — small purple pulsing dot with micro-tail
     {
-      const mcx = cx + comet.x * scale;
-      const mcy = cy + comet.y * scale;
+      const mcx = mapX(comet.x, comet.y);
+      const mcy = mapY(comet.x, comet.y);
       const pulse2 = 0.7 + 0.3 * Math.sin(sunPulse * 5);
-      // tiny tail
-      const mback = comet.angle + Math.PI;
+      // tiny tail — direction also rotates under mobile view
+      const mback = comet.angle + Math.PI + vRot;
       mctx.strokeStyle = 'rgba(192, 132, 252, 0.5)';
       mctx.lineWidth = 1.2;
       mctx.beginPath();
@@ -1909,9 +1991,10 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       mctx.fill();
       mctx.shadowBlur = 0;
     }
-    // Rocket — distinct arrow + pulsing halo so it never looks like a planet
-    const rx = cx + rocket.x * scale;
-    const ry = cy + rocket.y * scale;
+    // Rocket — distinct arrow + pulsing halo so it never looks like a planet.
+    // In mobile rocket-up mode this lands exactly at (cx, cy).
+    const rx = mapX(rocket.x, rocket.y);
+    const ry = mapY(rocket.x, rocket.y);
     const pulse = 1 + 0.35 * Math.sin(sunPulse * 4);
 
     // Outer pulsing ring
@@ -1927,10 +2010,12 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     mctx.arc(rx, ry, 6, 0, Math.PI * 2);
     mctx.fill();
 
-    // Arrow — points where the rocket is flying
+    // Arrow — points where the rocket is flying.
+    // Adding vRot composes with the mobile view rotation so the arrow always
+    // renders as screen-up on mobile (rocket.angle + (-rocket.angle - π/2) = -π/2).
     mctx.save();
     mctx.translate(rx, ry);
-    mctx.rotate(rocket.angle);
+    mctx.rotate(rocket.angle + vRot);
     mctx.shadowBlur = 10;
     mctx.shadowColor = '#7dd3fc';
     mctx.fillStyle = '#fb923c';
