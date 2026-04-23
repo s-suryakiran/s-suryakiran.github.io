@@ -746,7 +746,10 @@
       raf = requestAnimationFrame(tick);
       pulseT += 0.016;
       if (!autoRot && t > autoRotResume) autoRot = true;
-      if (autoRot) globeGroup.rotation.y += 0.0018;
+      // Respect prefers-reduced-motion — skip the idle auto-rotation entirely
+      // so users with vestibular sensitivity don't get a constantly moving globe.
+      const rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (autoRot && !rm) globeGroup.rotation.y += 0.0018;
 
       // Camera forward vector (points away from the camera, into the scene)
       camera.getWorldDirection(_camDir);
@@ -1045,6 +1048,11 @@
       e.preventDefault();
       return;
     }
+    if (k === 'escape' && expressOverlay && !expressOverlay.classList.contains('hidden')) {
+      closeExpress();
+      e.preventDefault();
+      return;
+    }
     if (k === 'escape' && panelOpen) {
       closePanel();
       e.preventDefault();
@@ -1055,6 +1063,9 @@
       e.preventDefault();
       return;
     }
+    // When the express-resume overlay is up, swallow game keys so WASD
+    // doesn't steer a hidden rocket or fire autopilot in the background.
+    if (expressOverlay && !expressOverlay.classList.contains('hidden')) return;
     if (['up', 'down', 'left', 'right'].includes(k)) e.preventDefault();
     keys[k] = true;
   });
@@ -1108,7 +1119,123 @@
     started = true;
     setTimeout(() => intro.style.display = 'none', 900);
     if (termHintBtn) termHintBtn.style.display = '';
+    if (resumeFab) resumeFab.classList.remove('hidden');
+    track('launch_clicked');
   });
+
+  // ---------- ANALYTICS HELPER ----------
+  // Thin wrapper around gtag so the rest of the code can fire events without
+  // having to care whether GA actually loaded (ad-blockers, offline, etc).
+  function track(event, params) {
+    try {
+      if (typeof gtag === 'function') gtag('event', event, params || {});
+    } catch (_) { /* no-op */ }
+  }
+
+  // ---------- EXPRESS RESUME (recruiter fast-path) ----------
+  // Traditional scrollable resume layout reachable via:
+  //   · "View as resume →" link on the intro screen
+  //   · Floating ⎙ Resume button in the top-right once flying
+  //   · The "?mode=resume" URL (for LinkedIn profile links etc.)
+  //   · Esc closes it (falls through to the usual panel-close handler)
+  const expressOverlay  = document.getElementById('express-resume');
+  const expressBody     = document.getElementById('express-body');
+  const expressBtn      = document.getElementById('express-resume-btn');
+  const expressCloseBtn = document.getElementById('express-close-btn');
+  const expressFlyBtn   = document.getElementById('express-fly-btn');
+  const expressPdfBtn   = document.getElementById('express-pdf-btn');
+  const resumeFab       = document.getElementById('resume-fab');
+  const introResumeDl   = document.getElementById('intro-resume-dl');
+
+  // We build the express body lazily on first open — it's static content
+  // assembled from the same PLANETS data, so one build is enough per session.
+  let expressBuilt = false;
+  function buildExpressBody() {
+    if (expressBuilt || !expressBody) return;
+    const byId = (id) => PLANETS.find(p => p.id === id);
+
+    // Take a planet's existing HTML and strip game-specific chrome (replay
+    // buttons, the 3D globe canvas, the redundant inner h2 titles) so it
+    // slots cleanly under our section headers.
+    function htmlMinus(raw, selectors) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = raw;
+      (selectors || []).forEach(sel =>
+        tmp.querySelectorAll(sel).forEach(el => el.remove())
+      );
+      return tmp.innerHTML;
+    }
+
+    expressBody.innerHTML = `
+      <section>
+        <p>I'm <b>Surya</b> — a software engineer who came up through research and ML. Today I build a risk-analysis platform at <b>Goldman Sachs</b> that handles <b>16M+ requests / day at 99.99% uptime</b>. Before that: founding engineer on a no-code data-science platform at <b>Tiger Analytics</b>, an <b>M.S. at NYU Courant</b>, and three published papers from India. Currently in <b>Salt Lake City</b>.</p>
+      </section>
+      <section>
+        <h2>Experience</h2>
+        ${htmlMinus(byId('earth').html(), ['h2', '.label', 'a.btn-primary'])}
+      </section>
+      <section>
+        <h2>Education &amp; Beyond</h2>
+        ${htmlMinus(byId('saturn').html(), ['h2', '.label'])}
+      </section>
+      <section>
+        <h2>Skills</h2>
+        ${htmlMinus(byId('venus').html(), ['h2', '.label'])}
+      </section>
+      <section>
+        <h2>Projects</h2>
+        ${htmlMinus(byId('mars').html(), ['h2', '.label', 'button'])}
+      </section>
+      <section>
+        <h2>Research Highlights</h2>
+        ${htmlMinus(byId('jupiter').html(), ['h2', '.label', 'a.btn-primary'])}
+      </section>
+      <section>
+        <h2>Contact</h2>
+        <div class="contact-inline">
+          <a href="mailto:suryakiranbdsk@gmail.com">✉ suryakiranbdsk@gmail.com</a>
+          <a href="https://www.linkedin.com/in/suryakiran-sureshkumar/" target="_blank" rel="noopener">in LinkedIn</a>
+          <a href="https://github.com/s-suryakiran" target="_blank" rel="noopener">★ GitHub</a>
+          <a href="./assets/Suryakiran_Sureshkumar_Resume.pdf" target="_blank" rel="noopener">⎙ Resume PDF</a>
+        </div>
+      </section>
+    `;
+    expressBuilt = true;
+  }
+
+  function openExpress(source) {
+    buildExpressBody();
+    if (expressOverlay) {
+      expressOverlay.classList.remove('hidden');
+      expressOverlay.scrollTop = 0;
+    }
+    track('express_resume_opened', { source: source || 'unknown' });
+  }
+  function closeExpress() {
+    if (expressOverlay) expressOverlay.classList.add('hidden');
+  }
+
+  if (expressBtn)      expressBtn.addEventListener('click', () => openExpress('intro'));
+  if (expressCloseBtn) expressCloseBtn.addEventListener('click', closeExpress);
+  if (expressFlyBtn)   expressFlyBtn.addEventListener('click', () => {
+    closeExpress();
+    if (!started) launchBtn.click();
+  });
+  if (resumeFab)       resumeFab.addEventListener('click', () => openExpress('fab'));
+  if (expressPdfBtn)   expressPdfBtn.addEventListener('click', () =>
+    track('resume_downloaded', { source: 'express' })
+  );
+  if (introResumeDl)   introResumeDl.addEventListener('click', () =>
+    track('resume_downloaded', { source: 'intro' })
+  );
+
+  // ?mode=resume → auto-open the express view on load. Useful for the
+  // LinkedIn profile URL field, email signatures, etc.
+  try {
+    if (new URLSearchParams(window.location.search).get('mode') === 'resume') {
+      openExpress('url-param');
+    }
+  } catch (_) { /* IE / old browser — skip */ }
 
   // ---------- TERMINAL ----------
   const term = document.getElementById('terminal');
@@ -1345,6 +1472,7 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     // kill rocket velocity softly so you don't fly away while reading
     rocket.vx *= 0.3;
     rocket.vy *= 0.3;
+    track('planet_visited', { planet: planet.id, name: planet.name });
     // Easter egg: first time you land on Mars, play the clip (if the file exists)
     if (planet.id === 'mars' && !marsAudioPlayedOnce) {
       marsAudioPlayedOnce = true;
