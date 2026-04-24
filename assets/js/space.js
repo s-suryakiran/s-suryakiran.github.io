@@ -315,11 +315,12 @@
         <p class="label">Officially a dwarf planet. Still showing up.</p>
         <p>Very few people fly this far out. Congratulations — you're either extremely curious, extremely bored, or a bot. Any of the three is fine with me.</p>
         <pre style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:1.3;color:#7dd3fc;background:rgba(125,211,252,0.06);border:1px solid rgba(125,211,252,0.2);padding:1rem;overflow-x:auto;white-space:pre;">
-   ___ _   _ ___ __   __ _   _  _____
-  / __| | | |  _ \\ \\ / /| | | |/ /_\\
-  \\__ \\ |_| | |_) \\ V / | |_| / / _ \\
-  |___/\\___/|  __/ |_|  |____/_/\\_\\_\\
-            |_|   made this whole thing</pre>
+   ____  _   _ ______   __    _
+  / ___|| | | |  _ \\ \\ / /   / \\
+  \\___ \\| | | | |_) \\ V /   / _ \\
+   ___) | |_| |  _ < | |   / ___ \\
+  |____/ \\___/|_| \\_\\|_|  /_/   \\_\\
+                    made this whole thing</pre>
         <h3>The one quote I actually live by</h3>
         <blockquote style="border-left:2px solid var(--accent);padding:0.3rem 1rem;margin:1rem 0;color:var(--ink);font-style:italic;">
           "We are all in the gutter, but some of us are looking at the stars."
