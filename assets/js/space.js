@@ -66,13 +66,13 @@
       desc: 'LoRA-fine-tuned QwenVL on CARLA driving routes to produce control commands. Hit 40% of baseline with just 5% data; surpassed baselines at 40%.',
       link: 'https://github.com/s-suryakiran/DriveVLM', cta: 'GitHub' },
     { title: 'ChatLoom',
-      desc: 'A specialised LLM chatbot for cosmology & astrophysics — Chainlit front-end, runs locally and answers domain questions with expert-level depth.',
+      desc: 'A specialised LLM chatbot for cosmology & astrophysics — Chainlit front-end, runs locally for conversations about cosmology and astrophysics.',
       link: 'https://github.com/s-suryakiran/ChatLoom', cta: 'GitHub' },
     { title: 'SegMentor',
-      desc: 'Future frame segmentation with SimVP + MogaNet + DeepLabV3+. Predicts the 22nd frame from 11 RGB frames; strong Jaccard on hidden test.',
+      desc: 'Future frame segmentation with SimVP + MogaNet + DeepLabV3+. Predicts segmentation for the 22nd frame from a sequence of 11 RGB frames.',
       link: 'https://github.com/s-suryakiran/SegMentor', cta: 'GitHub' },
     { title: 'Pokémon GAN',
-      desc: 'DCGAN in PyTorch trained on a Pokémon sprite dataset — generates novel creatures you’ve never seen before.',
+      desc: 'DCGAN in PyTorch trained on a Pokémon sprite dataset — explores image generation from learned sprite patterns.',
       link: 'https://github.com/s-suryakiran/Pokemon-GAN', cta: 'GitHub' },
     { title: 'Video Summarisation for Search',
       desc: 'Keyframe extraction + captioning pipeline that makes video databases searchable with meaningful keywords.',
@@ -117,32 +117,38 @@
       html: () => `
         <h2>About</h2>
         <p class="label">Hey there — I'm Surya 👋</p>
-        <p>I'm a guy fascinated by the endless possibilities of technology. My journey started in the vibrant city of <b>Madurai, India</b>, and has since carried me through New York and out to <b>Salt Lake City</b>, where I live today — mountains outside the window, fintech on the screen.</p>
+        <p>I'm a software engineer with a background in machine learning and computer vision. I grew up in <b>Madurai, India</b>, studied in New York, and now live in <b>Salt Lake City</b> — mountains outside the window, fintech on the screen.</p>
         <p>Today I'm an <b>Analyst, Software Engineer at Goldman Sachs</b> (Salt Lake City office), building a risk-analysis platform that handles <b>16M+ daily requests</b> at <b>99.99% uptime</b>. Before Salt Lake, I finished my <b>M.S. in Computer Science at NYU's Courant Institute</b> in New York, where I also TA'd four courses across computer vision, probability, and linear algebra.</p>
         <p>Before the US I was a <b>Machine Learning Engineer at Tiger Analytics</b>, where I was the lead founding engineer on a no-code data-science platform — a project I still talk about with my hands.</p>
         <h3>What gets me up in the morning</h3>
         <p>Puzzles. Especially the ones that involve data, code, and real-world constraints. Some days I'm knee-deep in a model; other days I'm wiring together distributed services. The thrill of turning complex issues into elegant, user-friendly solutions is what keeps me going.</p>
         <h3>Recently</h3>
-        <p>I've been exploring <b>Large Language Models</b> and how they're reshaping AI — retrieval systems, vision-language integrations, efficient inference. A bit of a tech Swiss Army knife, always ready for the next challenge.</p>
+        <p>I've been exploring <b>Large Language Models</b> and how they're reshaping AI — retrieval systems, vision-language integrations, efficient inference. I’m interested in how these systems behave beyond a demo: their accuracy, latency, and practical limitations.</p>
         <p>If you're into the latest AI trends, need a hand on a software project, or just want to talk tech over coffee — beam a message from Neptune. Let's make something awesome together.</p>
 
-        <h3>The journey so far</h3>
-        <p class="label">Madurai → Singapore → Chennai → New York → Raleigh → Salt Lake City · <span style="color:var(--ink-dim)">drag to spin · pins mark every workplace</span></p>
-        <div id="globe-3d" style="position:relative;width:100%;height:420px;background:radial-gradient(ellipse at center, rgba(10,15,40,0.9), rgba(3,3,11,1));border:1px solid rgba(125,211,252,0.2);border-radius:6px;margin-top:0.6rem;overflow:hidden;cursor:grab;">
-          <div class="globe-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.15em;">[booting globe…]</div>
-          <div class="globe-fallback" style="display:none;position:absolute;inset:0;padding:1.2rem;overflow:auto;">
-            <p style="color:var(--accent-3);font-family:'JetBrains Mono',monospace;font-size:0.75rem;margin-bottom:0.8rem">[ 3D globe unavailable — offline or WebGL disabled. City list follows. ]</p>
-            <ul style="list-style:none;padding:0;margin:0;display:grid;gap:0.4rem;font-size:0.85rem;">
-              <li><b style="color:var(--accent-3)">Madurai</b> — Thiagarajar '17–'21 · BSNL '18 · Research '19–'21</li>
-              <li><b style="color:var(--accent-3)">Singapore</b> — NUS · HPE '19</li>
-              <li><b style="color:var(--accent-3)">Chennai</b> — Tiger Analytics '21–'22</li>
-              <li><b style="color:var(--accent-3)">New York</b> — NYU '22–'24</li>
-              <li><b style="color:var(--accent-3)">Raleigh</b> — Promantus '23 (summer internship during NYU)</li>
-              <li><b style="color:var(--accent)">Salt Lake City</b> — Goldman Sachs '24–now</li>
-            </ul>
+        <section class="journey">
+          <div class="journey-heading"><div><p class="label">THE JOURNEY</p><h3>Six cities. One ongoing story.</h3></div><span class="journey-status">Based in Salt Lake City</span></div>
+          <p>From studying in Madurai to building software in Salt Lake City. Select a stop to explore the globe.</p>
+          <div class="journey-layout">
+            <div class="globe-stage">
+              <div id="globe-3d" aria-label="Interactive Earth showing study and work locations">
+                <div class="globe-loading">Loading Earth…</div>
+                <div class="globe-fallback" hidden>3D view unavailable. You can still explore every stop in the timeline.</div>
+              </div>
+              <div class="globe-toolbar" aria-label="Globe controls">
+                <button type="button" data-globe="rotate" aria-pressed="false">Auto-rotate</button>
+                <button type="button" data-globe="out" aria-label="Zoom out">−</button>
+                <button type="button" data-globe="in" aria-label="Zoom in">+</button>
+              </div>
+              <p class="globe-hint">Drag to rotate · use + / − to zoom</p>
+              <div class="globe-legend"><span>● Career &amp; education</span><span>┄ Summer internship</span></div>
+            </div>
+            <div class="journey-stops" aria-label="Study and work locations">
+              ${CITIES.map((city, i) => `<button type="button" class="journey-stop" data-city="${i}" aria-pressed="${!!city.current}"><span class="stop-number">${String(i+1).padStart(2,'0')}</span><span><b>${city.name}</b><small>${city.role}</small></span>${city.current ? '<span class="stop-now">NOW</span>' : ''}</button>`).join('')}
+            </div>
           </div>
-        </div>
-        <p style="color:var(--ink-dim);font-size:0.85rem;margin-top:0.6rem">Six cities, three continents, one extremely patient suitcase. Drag the globe to spin · scroll to zoom.</p>
+          <div class="journey-detail" aria-live="polite"><b>Salt Lake City</b><span>Goldman Sachs · Software engineering · 2024–present</span></div>
+        </section>
       `
     },
     {
@@ -226,7 +232,7 @@
           <li><a href="https://link.springer.com/chapter/10.1007/978-981-15-8697-2_52" target="_blank">Scene Understanding in Night-Time Using SSAN Dataset</a> — NCVPRIPG 2019 / Springer 2020</li>
         </ul>
 
-        <a class="btn-primary" href="./assets/Suryakiran_Sureshkumar_Resume.pdf" target="_blank">Download Resume</a>
+        <a class="btn-primary" href="./assets/Suryakiran_Sureshkumar_Resume.pdf?v=20260922" target="_blank">Download Resume</a>
       `
     },
     {
@@ -236,7 +242,7 @@
       html: () => `
         <h2>Projects</h2>
         <p class="label">
-          Featured missions — each its own moon
+          Selected projects · machine learning and software
           <button onclick="window.__playMarsClip && window.__playMarsClip()" style="margin-left:0.8rem;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.4);color:#fb923c;font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:0.2rem 0.55rem;cursor:pointer;letter-spacing:0.05em;">▶ replay transmission</button>
         </p>
         <div class="projects-grid">
@@ -244,7 +250,7 @@
             <div class="project-card">
               <h4>${p.title}</h4>
               <p>${p.desc}</p>
-              <a class="project-link" href="${p.link}" target="_blank">${p.cta} →</a>
+              <a class="project-link" href="${p.link}" target="_blank" rel="noopener">${p.cta} →</a>
             </div>
           `).join('')}
         </div>
@@ -366,7 +372,7 @@
             <span class="ico">◆</span>
             <div><span class="label-tiny">LeetCode</span><span class="val">leetcode.com/s-suryakiran</span></div>
           </a>
-          <a class="contact-row" href="./assets/Suryakiran_Sureshkumar_Resume.pdf" target="_blank">
+          <a class="contact-row" href="./assets/Suryakiran_Sureshkumar_Resume.pdf?v=20260922" target="_blank">
             <span class="ico">⎙</span>
             <div><span class="label-tiny">Resume</span><span class="val">Download PDF</span></div>
           </a>
@@ -478,10 +484,24 @@
     { name: 'Salt Lake City', lat: 40.7608, lon:-111.8910, role: "Goldman Sachs '24–now",                             color: 0x7dd3fc, current: true },
   ];
 
+  let globeGeneration = 0;
   let globe3d = null; // { dispose(): void, raf, etc. }
 
   async function initGlobe(container) {
     if (!container) return;
+    const generation = ++globeGeneration;
+    const journey = container.closest('.journey');
+    const detail = journey.querySelector('.journey-detail');
+    const stopButtons = [...journey.querySelectorAll('[data-city]')];
+    const selectText = index => {
+      const city = CITIES[index];
+      stopButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+      detail.replaceChildren();
+      const title = document.createElement('b'); title.textContent = city.name;
+      const description = document.createElement('span'); description.textContent = city.role;
+      detail.append(title, description);
+    };
+    stopButtons.forEach((button, index) => button.onclick = () => selectText(index));
     const loading = container.querySelector('.globe-loading');
     const fallback = container.querySelector('.globe-fallback');
 
@@ -491,11 +511,13 @@
     } catch (err) {
       // Couldn't fetch three.js — reveal the text fallback
       if (loading) loading.style.display = 'none';
-      if (fallback) fallback.style.display = 'block';
+      if (fallback) fallback.hidden = false;
+      journey.querySelectorAll('[data-globe]').forEach(button => button.disabled = true);
       console.warn('Globe: Three.js failed to load —', err);
       return;
     }
 
+    if (generation !== globeGeneration || !container.isConnected) return;
     const W = container.clientWidth;
     const H = container.clientHeight;
 
@@ -505,17 +527,19 @@
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     } catch (err) {
       if (loading) loading.style.display = 'none';
-      if (fallback) fallback.style.display = 'block';
+      if (fallback) fallback.hidden = false;
+      journey.querySelectorAll('[data-globe]').forEach(button => button.disabled = true);
       return;
     }
     renderer.setSize(W, H);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.domElement.style.display = 'block';
+    renderer.domElement.style.touchAction = 'none';
     container.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
-    camera.position.set(0, 0.15, 3.1);
+    camera.position.set(0, 0, Math.max(4, 3.2 / (W / H)));
     camera.lookAt(0, 0, 0);
 
     // --- Build equirectangular earth texture on a 2D canvas ---
@@ -528,14 +552,18 @@
     // Earth sphere
     const earth = new THREE.Mesh(
       new THREE.SphereGeometry(1, 96, 96),
-      new THREE.MeshBasicMaterial({ map: earthTex })
+      new THREE.MeshPhongMaterial({ map: earthTex, shininess: 18, specular: 0x284d64 })
     );
     globeGroup.add(earth);
+    scene.add(new THREE.AmbientLight(0xc4ddf4, 1.5));
+    const sunlight = new THREE.DirectionalLight(0xfff3da, 2.2);
+    sunlight.position.set(-3, 4, 5);
+    scene.add(sunlight);
 
     // Wireframe overlay for hologram vibe
     const wire = new THREE.Mesh(
       new THREE.SphereGeometry(1.003, 32, 24),
-      new THREE.MeshBasicMaterial({ color: 0x7dd3fc, wireframe: true, transparent: true, opacity: 0.08 })
+      new THREE.MeshBasicMaterial({ color: 0x7dd3fc, wireframe: true, transparent: true, opacity: 0.025 })
     );
     globeGroup.add(wire);
 
@@ -543,7 +571,7 @@
     // NOTE: clamp the input to pow() with max(0.0, ...) — otherwise GLSL produces
     // NaN fragments on the far hemisphere which render as a dark halo/ring.
     const atmo = new THREE.Mesh(
-      new THREE.SphereGeometry(1.18, 64, 64),
+      new THREE.SphereGeometry(1.055, 64, 64),
       new THREE.ShaderMaterial({
         vertexShader: `
           varying vec3 vNormal;
@@ -556,7 +584,7 @@
           void main() {
             float d = dot(vNormal, vec3(0.0, 0.0, 1.0));
             float intensity = pow(max(0.0, 0.75 - d), 2.5);
-            gl_FragColor = vec4(0.49, 0.83, 0.99, 1.0) * intensity;
+            gl_FragColor = vec4(0.22, 0.55, 0.9, 1.0) * intensity * 0.45;
           }`,
         blending: THREE.AdditiveBlending,
         side: THREE.BackSide,
@@ -632,10 +660,17 @@
       const a = latLonTo3D(ca.lat, ca.lon, 1.012);
       const b = latLonTo3D(cb.lat, cb.lon, 1.012);
       const angle = a.angleTo(b);                          // 0 … π
-      const arcHeight = 1.0 + 0.55 * angle;                // short = 1.0, antipodal ≈ 2.73
-      const mid = a.clone().add(b).multiplyScalar(0.5).normalize().multiplyScalar(arcHeight);
-      const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
-
+      const start = a.clone().normalize(), end = b.clone().normalize();
+      // Great-circle interpolation keeps even intercontinental routes above Earth.
+      class RouteCurve extends THREE.Curve {
+        getPoint(t, target = new THREE.Vector3()) {
+          if (angle < 0.0001) return target.copy(start).multiplyScalar(1.018);
+          target.copy(start).multiplyScalar(Math.sin((1-t)*angle) / Math.sin(angle));
+          target.addScaledVector(end, Math.sin(t*angle) / Math.sin(angle));
+          return target.normalize().multiplyScalar(1.018 + Math.sin(Math.PI*t) * Math.min(0.32, angle*0.2));
+        }
+      }
+      const curve = new RouteCurve();
       // Visual language:
       //   - cross-continent main arcs = thicker + purple
       //   - within-continent main arcs = cyan
@@ -650,7 +685,15 @@
         new THREE.TubeGeometry(curve, 80, radius, 8, false),
         new THREE.MeshBasicMaterial({ color, transparent: true, opacity })
       );
-      globeGroup.add(tube);
+      if (isSide) {
+        tube.geometry.dispose(); tube.material.dispose();
+        const branch = new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints(curve.getPoints(80)),
+          new THREE.LineDashedMaterial({ color, dashSize: 0.025, gapSize: 0.018, transparent: true, opacity: 0.8 })
+        );
+        branch.computeLineDistances();
+        globeGroup.add(branch);
+      } else globeGroup.add(tube);
 
       // Travelling glow dot — a visual signal the arc actually exists and shows direction
       const dot = new THREE.Mesh(
@@ -688,15 +731,34 @@
 
     // --- interaction: drag, wheel zoom, auto-rotate ---
     let drag = { active: false, x: 0, y: 0 };
-    let autoRot = true;
-    let autoRotResume = 0;
+    let autoRot = false;
+    let selectedCity = CITIES.length - 1;
 
+
+    const focusCity = index => {
+      selectedCity = index;
+      selectText(index);
+      const city = CITIES[index];
+      const position = latLonTo3D(city.lat, city.lon, 1);
+      globeGroup.rotation.set(city.lat * Math.PI / 180, -Math.atan2(position.x, position.z), 0, 'XYZ');
+      autoRot = false;
+      journey.querySelector('[data-globe="rotate"]').setAttribute('aria-pressed', 'false');
+    };
+    stopButtons.forEach((button, index) => button.onclick = () => focusCity(index));
+    focusCity(selectedCity);
+    journey.querySelector('[data-globe="rotate"]').onclick = event => {
+      autoRot = !autoRot;
+      event.currentTarget.setAttribute('aria-pressed', String(autoRot));
+    };
+    journey.querySelector('[data-globe="in"]').onclick = () => { camera.position.z = Math.max(2.5, camera.position.z - 0.35); };
+    journey.querySelector('[data-globe="out"]').onclick = () => { camera.position.z = Math.min(6.5, camera.position.z + 0.35); };
     const onDown = (e) => {
       drag.active = true;
       drag.x = e.clientX;
       drag.y = e.clientY;
       autoRot = false;
-      autoRotResume = performance.now() + 2500;
+      journey.querySelector('[data-globe="rotate"]').setAttribute('aria-pressed', 'false');
+      renderer.domElement.setPointerCapture(e.pointerId);
       container.style.cursor = 'grabbing';
     };
     const onMove = (e) => {
@@ -720,6 +782,7 @@
     renderer.domElement.addEventListener('pointerdown', onDown);
     window.addEventListener('pointermove', onMove);
     window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
     renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
 
     // Resize on panel width change
@@ -728,6 +791,7 @@
       const nh = container.clientHeight;
       if (!nw || !nh) return;
       camera.aspect = nw / nh;
+      camera.position.z = Math.max(4, 3.2 / camera.aspect);
       camera.updateProjectionMatrix();
       renderer.setSize(nw, nh);
     };
@@ -745,8 +809,8 @@
     let pulseT = 0;
     function tick(t) {
       raf = requestAnimationFrame(tick);
-      pulseT += 0.016;
-      if (!autoRot && t > autoRotResume) autoRot = true;
+      if (!motionPreference.matches) pulseT += 0.016;
+
       // Respect prefers-reduced-motion — skip the idle auto-rotation entirely
       // so users with vestibular sensitivity don't get a constantly moving globe.
       const rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -769,12 +833,12 @@
         const facing = -_toPin.dot(_camDir); // 1 = dead-centre, -1 = directly behind
         const alpha = Math.max(0, Math.min(1, (facing - 0.1) * 2.2));
         po.label.material.opacity = alpha;
-        po.label.visible = alpha > 0.02;
+        po.label.visible = alpha > 0.02 && po.city === CITIES[selectedCity];
       }
 
       // Travellers — glow dots ride along each arc
       for (const tr of travelers) {
-        tr.offset = (tr.offset + tr.speed * 16.67) % 1;
+        if (!rm) tr.offset = (tr.offset + tr.speed * 16.67) % 1;
         const pos = tr.curve.getPointAt(tr.offset);
         tr.dot.position.copy(pos);
       }
@@ -789,6 +853,7 @@
         cancelAnimationFrame(raf);
         window.removeEventListener('pointermove', onMove);
         window.removeEventListener('pointerup', onUp);
+        window.removeEventListener('pointercancel', onUp);
         window.removeEventListener('resize', onResize);
         renderer.domElement.removeEventListener('pointerdown', onDown);
         renderer.domElement.removeEventListener('wheel', onWheel);
@@ -800,6 +865,7 @@
             else obj.material.dispose();
           }
         });
+        pinObjs.forEach(po => po.label.material.map.dispose());
         earthTex.dispose();
         renderer.dispose();
         if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
@@ -808,6 +874,7 @@
   }
 
   function disposeGlobe() {
+    globeGeneration++;
     if (globe3d) { try { globe3d.dispose(); } catch (_) {} globe3d = null; }
   }
 
@@ -821,9 +888,9 @@
 
     // Ocean — deep navy with a subtle vertical gradient (darker at poles)
     const oceanGrad = g.createLinearGradient(0, 0, 0, H);
-    oceanGrad.addColorStop(0,   '#030613');
-    oceanGrad.addColorStop(0.5, '#0a1a33');
-    oceanGrad.addColorStop(1,   '#030613');
+    oceanGrad.addColorStop(0,   '#0a223b');
+    oceanGrad.addColorStop(0.5, '#194d72');
+    oceanGrad.addColorStop(1,   '#0a223b');
     g.fillStyle = oceanGrad;
     g.fillRect(0, 0, W, H);
 
@@ -860,10 +927,10 @@
     ];
 
     g.save();
-    g.fillStyle = 'rgba(32, 90, 120, 0.9)';
-    g.strokeStyle = 'rgba(125, 211, 252, 0.7)';
+    g.fillStyle = '#71917a';
+    g.strokeStyle = 'rgba(159,188,152,0.7)';
     g.lineWidth = 1.4;
-    g.shadowBlur = 14;
+    g.shadowBlur = 0;
     g.shadowColor = 'rgba(125, 211, 252, 0.35)';
     for (const poly of continents) {
       g.beginPath();
@@ -895,6 +962,7 @@
     g.beginPath(); g.moveTo(0, H / 2); g.lineTo(W, H / 2); g.stroke();
 
     const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = 8;
     tex.needsUpdate = true;
     return tex;
@@ -902,7 +970,7 @@
 
   function makeCityLabel(THREE, city) {
     const c = document.createElement('canvas');
-    c.width = 360; c.height = 88;
+    c.width = 360; c.height = 64;
     const g = c.getContext('2d');
     // background plate
     g.fillStyle = 'rgba(5, 8, 20, 0.88)';
@@ -916,17 +984,15 @@
     g.textAlign = 'center';
     g.font = '700 26px "JetBrains Mono", monospace';
     g.fillStyle = city.current ? '#7dd3fc' : '#fb923c';
-    g.fillText(city.name, c.width / 2, 38);
-    g.font = '500 14px "JetBrains Mono", monospace';
-    g.fillStyle = 'rgba(232, 236, 255, 0.8)';
-    g.fillText(city.role, c.width / 2, 62);
+    g.fillText(city.name, c.width / 2, 41);
+
 
     const tex = new THREE.CanvasTexture(c);
     const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false });
     const sprite = new THREE.Sprite(mat);
     // Roughly 0.6 wide in world units; aspect matches canvas
     const aspect = c.width / c.height;
-    sprite.scale.set(0.55 * aspect * 0.35, 0.35 * 0.55, 1);
+    sprite.scale.set(0.65, 0.65 / aspect, 1);
     return sprite;
   }
 
@@ -959,6 +1025,7 @@
   let lastTime = performance.now();
   let started = false;
   let sunPulse = 0;
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   let autopilotTarget = null;
 
   // Build parallax starfield (three layers)
@@ -1029,6 +1096,20 @@
   }
 
   window.addEventListener('keydown', (e) => {
+    if (!expressOverlay.classList.contains('hidden')) {
+      if (e.key === 'Escape') { closeExpress(); e.preventDefault(); }
+      if (e.key === 'Tab') {
+        const focusable = [...expressOverlay.querySelectorAll('a[href], button')];
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && (document.activeElement === first || document.activeElement.matches('section'))) {
+          last.focus(); e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          first.focus(); e.preventDefault();
+        }
+      }
+      return;
+    }
+    if (e.target.closest('button, a, input, select, textarea') && e.key !== 'Escape') return;
     // Backtick toggles the terminal from anywhere (but not while typing inside it)
     if ((e.code === 'Backquote' || e.key === '`') && e.target !== termInput) {
       if (started) { toggleTerminal(); e.preventDefault(); }
@@ -1171,7 +1252,7 @@
       <section>
         <p>I'm <b>Surya</b> — a software engineer who came up through research and ML. Today I build a risk-analysis platform at <b>Goldman Sachs</b> that handles <b>16M+ requests / day at 99.99% uptime</b>. Before that: founding engineer on a no-code data-science platform at <b>Tiger Analytics</b>, an <b>M.S. at NYU Courant</b>, and three published papers from India. Currently in <b>Salt Lake City</b>.</p>
       </section>
-      <section>
+      <section id="portfolio-experience" tabindex="-1">
         <h2>Experience</h2>
         ${htmlMinus(byId('earth').html(), ['h2', '.label', 'a.btn-primary'])}
       </section>
@@ -1183,7 +1264,7 @@
         <h2>Skills</h2>
         ${htmlMinus(byId('venus').html(), ['h2', '.label'])}
       </section>
-      <section>
+      <section id="portfolio-projects" tabindex="-1">
         <h2>Projects</h2>
         ${htmlMinus(byId('mars').html(), ['h2', '.label', 'button'])}
       </section>
@@ -1191,29 +1272,48 @@
         <h2>Research Highlights</h2>
         ${htmlMinus(byId('jupiter').html(), ['h2', '.label', 'a.btn-primary'])}
       </section>
-      <section>
+      <section id="portfolio-contact" tabindex="-1">
         <h2>Contact</h2>
         <div class="contact-inline">
           <a href="mailto:suryakiranbdsk@gmail.com">✉ suryakiranbdsk@gmail.com</a>
           <a href="https://www.linkedin.com/in/suryakiran-sureshkumar/" target="_blank" rel="noopener">in LinkedIn</a>
           <a href="https://github.com/s-suryakiran" target="_blank" rel="noopener">★ GitHub</a>
-          <a href="./assets/Suryakiran_Sureshkumar_Resume.pdf" target="_blank" rel="noopener">⎙ Resume PDF</a>
+          <a href="./assets/Suryakiran_Sureshkumar_Resume.pdf?v=20260922" target="_blank" rel="noopener">⎙ Resume PDF</a>
         </div>
       </section>
     `;
     expressBuilt = true;
   }
 
-  function openExpress(source) {
+  let expressReturnFocus = null;
+  document.querySelectorAll('[data-section]').forEach(button => {
+    button.addEventListener('click', () => openExpress('navigation', button.dataset.section));
+  });
+
+  function openExpress(source, section) {
+    expressReturnFocus = document.activeElement;
+    Object.keys(keys).forEach(key => { keys[key] = false; });
     buildExpressBody();
     if (expressOverlay) {
       expressOverlay.classList.remove('hidden');
       expressOverlay.scrollTop = 0;
+      const target = section && document.getElementById('portfolio-' + section);
+      if (target) {
+        target.scrollIntoView({ block: 'start' });
+        target.focus({ preventScroll: true });
+      } else {
+        expressCloseBtn.focus({ preventScroll: true });
+      }
+      Array.from(document.getElementById('game').children).forEach(el => {
+        if (el !== expressOverlay) el.inert = true;
+      });
     }
     track('express_resume_opened', { source: source || 'unknown' });
   }
   function closeExpress() {
     if (expressOverlay) expressOverlay.classList.add('hidden');
+    Array.from(document.getElementById('game').children).forEach(el => { el.inert = false; });
+    if (expressReturnFocus && expressReturnFocus.isConnected) expressReturnFocus.focus();
   }
 
   if (expressBtn)      expressBtn.addEventListener('click', () => openExpress('intro'));
@@ -1352,7 +1452,7 @@ into: LLMs, retrieval, distributed systems, and the cosmos.`);
     },
     resume: () => {
       termPrint(`opening resume…`, 'ok');
-      window.open('./assets/Suryakiran_Sureshkumar_Resume.pdf', '_blank');
+      window.open('./assets/Suryakiran_Sureshkumar_Resume.pdf?v=20260922', '_blank');
     },
     socials: () => {
       termPrint(`<h4>links</h4>
@@ -1504,7 +1604,7 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     const dt = Math.min(0.033, (now - lastTime) / 1000);
     lastTime = now;
 
-    if (!panelOpen && !termOpen && started) update(dt);
+    if (!panelOpen && !termOpen && started && expressOverlay.classList.contains('hidden')) update(dt);
     render();
     renderMini();
     requestAnimationFrame(step);
@@ -1689,7 +1789,7 @@ or visit <span class="cmd">contact</span> to send it from here.`);
       compass.innerHTML = `<b>${nearestTarget.name}</b>${Math.round(nt)} units out`;
     }
 
-    sunPulse += dt;
+    if (!motionPreference.matches) sunPulse += dt;
   }
 
   function spawnThrustParticle() {
@@ -1832,95 +1932,125 @@ or visit <span class="cmd">contact</span> to send it from here.`);
     ctx.restore();
   }
 
+  // Generate surface detail once per planet; keep the animation loop lightweight.
+  const surfaceCache = new Map();
+  function planetSurface(pl) {
+    if (surfaceCache.has(pl.id)) return surfaceCache.get(pl.id);
+    const surface = document.createElement('canvas');
+    surface.width = surface.height = 256;
+    const g = surface.getContext('2d');
+    let seed = [...pl.id].reduce((n, c) => n * 31 + c.charCodeAt(0), 7) >>> 0;
+    const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+    g.fillStyle = pl.id === 'earth' ? '#28618b' : pl.color;
+    g.fillRect(0, 0, 256, 256);
+    // Fine mottling: rock, clouds, or solar granulation.
+    for (let i = 0; i < 1800; i++) {
+      g.fillStyle = random() > 0.5 ? 'rgba(255,239,208,0.09)' : 'rgba(20,12,9,0.09)';
+      g.beginPath();
+      g.ellipse(random() * 256, random() * 256, 1 + random() * 6, 1 + random() * 3, 0, 0, Math.PI * 2);
+      g.fill();
+    }
+    if (pl.bands || pl.ring || pl.id === 'venus' || pl.id === 'neptune') {
+      for (let y = 0; y < 256; y += 5) {
+        g.fillStyle = y % 15 === 0 ? 'rgba(80,42,26,0.22)' : 'rgba(255,235,193,0.13)';
+        g.beginPath();
+        g.moveTo(0, y);
+        g.bezierCurveTo(80, y - 9, 160, y + 12, 256, y - 2);
+        g.lineTo(256, y + 5);
+        g.bezierCurveTo(160, y + 17, 80, y - 4, 0, y + 5);
+        g.fill();
+      }
+      if (pl.bands) {
+        g.fillStyle = '#a95f43';
+        g.beginPath(); g.ellipse(171, 164, 24, 11, -0.1, 0, Math.PI * 2); g.fill();
+        g.strokeStyle = 'rgba(242,203,153,0.45)'; g.lineWidth = 3; g.stroke();
+      }
+    } else if (pl.id === 'earth') {
+      // Stylized continental silhouettes, polar ice, and cloud systems.
+      const land = [
+        [[25,55],[57,32],[100,46],[110,67],[86,85],[81,107],[61,110],[42,82]],
+        [[80,117],[109,125],[125,153],[110,185],[91,218],[83,172]],
+        [[137,70],[166,48],[211,54],[245,80],[211,101],[180,96],[164,117],[143,100]],
+        [[143,110],[180,120],[180,151],[158,184],[144,155]],
+        [[202,180],[230,168],[249,192],[219,205]]
+      ];
+      g.fillStyle = '#65816b';
+      land.forEach(points => { g.beginPath(); points.forEach(([x,y], i) => i ? g.lineTo(x,y) : g.moveTo(x,y)); g.closePath(); g.fill(); });
+      g.fillStyle = 'rgba(235,245,246,0.8)';
+      g.fillRect(0,0,256,17); g.fillRect(0,242,256,14);
+      for (let i = 0; i < 22; i++) {
+        g.strokeStyle = 'rgba(255,255,255,0.34)'; g.lineWidth = 2 + random() * 5;
+        g.beginPath(); g.ellipse(random()*256, random()*256, 15+random()*25, 5+random()*8, -0.3, 0, Math.PI); g.stroke();
+      }
+    } else if (!pl.isSun) {
+      for (let i = 0; i < 35; i++) {
+        const x = random()*256, y = random()*256, r = 2+random()*12;
+        g.fillStyle = 'rgba(30,17,14,0.16)';
+        g.beginPath(); g.arc(x,y,r,0,Math.PI*2); g.fill();
+        g.strokeStyle = 'rgba(255,223,180,0.2)'; g.lineWidth = 1;
+        g.beginPath(); g.arc(x,y+1,r,0.1,Math.PI); g.stroke();
+      }
+    }
+    surfaceCache.set(pl.id, surface);
+    return surface;
+  }
+
+  function drawPlanetRings(pl, front) {
+    ctx.save();
+    ctx.translate(pl.x, pl.y);
+    ctx.rotate(-0.35);
+    ctx.scale(1, 0.32);
+    for (let i = 0; i < 18; i++) {
+      if (i === 11 || i === 12) continue; // gap between the main ring groups
+      ctx.strokeStyle = hexA(pl.ringColor, 0.22 + (i % 3) * 0.13);
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.arc(0, 0, pl.r * (1.25 + i * 0.034), front ? 0 : Math.PI, front ? Math.PI : Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
   function drawPlanet(pl) {
     ctx.save();
-    // Outer glow
-    const glowR = pl.r * (pl.isSun ? 3.2 : 1.8);
-    const gg = ctx.createRadialGradient(pl.x, pl.y, pl.r * 0.7, pl.x, pl.y, glowR);
-    gg.addColorStop(0, hexA(pl.glow, pl.isSun ? 0.7 : 0.35));
-    gg.addColorStop(1, hexA(pl.glow, 0));
-    ctx.fillStyle = gg;
-    ctx.beginPath();
-    ctx.arc(pl.x, pl.y, glowR, 0, Math.PI * 2);
-    ctx.fill();
+    if (pl.ring) drawPlanetRings(pl, false);
+    const glowR = pl.r * (pl.isSun ? 2.8 : 1.16);
+    const glow = ctx.createRadialGradient(pl.x, pl.y, pl.r * 0.95, pl.x, pl.y, glowR);
+    glow.addColorStop(0, hexA(pl.glow, pl.isSun ? 0.6 : 0.18));
+    glow.addColorStop(1, hexA(pl.glow, 0));
+    ctx.fillStyle = glow;
+    ctx.beginPath(); ctx.arc(pl.x, pl.y, glowR, 0, Math.PI * 2); ctx.fill();
 
-    // Body — radial gradient for depth
-    const bg = ctx.createRadialGradient(
-      pl.x - pl.r * 0.35, pl.y - pl.r * 0.35, pl.r * 0.1,
-      pl.x, pl.y, pl.r
-    );
-    bg.addColorStop(0, pl.coreColor || pl.color);
-    bg.addColorStop(0.55, pl.color);
-    bg.addColorStop(1, shade(pl.color, -40));
-    ctx.fillStyle = bg;
-    ctx.beginPath();
-    ctx.arc(pl.x, pl.y, pl.r, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Bands for jupiter
-    if (pl.bands) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(pl.x, pl.y, pl.r, 0, Math.PI * 2);
-      ctx.clip();
-      for (let i = -3; i <= 3; i++) {
-        ctx.fillStyle = i % 2 === 0 ? 'rgba(90, 50, 20, 0.25)' : 'rgba(255, 230, 170, 0.08)';
-        const yy = pl.y + (i / 3) * pl.r * 0.9;
-        ctx.fillRect(pl.x - pl.r, yy - pl.r * 0.18, pl.r * 2, pl.r * 0.22);
-      }
-      ctx.restore();
+    ctx.save();
+    ctx.beginPath(); ctx.arc(pl.x, pl.y, pl.r, 0, Math.PI * 2); ctx.clip();
+    ctx.drawImage(planetSurface(pl), pl.x-pl.r, pl.y-pl.r, pl.r*2, pl.r*2);
+    if (!pl.isSun) {
+      // Light comes from the sun at world origin, rather than the screen corner.
+      const distance = Math.hypot(pl.x, pl.y) || 1;
+      const lx = -pl.x / distance, ly = -pl.y / distance;
+      const light = ctx.createLinearGradient(pl.x+lx*pl.r, pl.y+ly*pl.r, pl.x-lx*pl.r, pl.y-ly*pl.r);
+      light.addColorStop(0, 'rgba(255,239,211,0.3)');
+      light.addColorStop(0.35, 'rgba(5,8,17,0.03)');
+      light.addColorStop(0.57, 'rgba(3,5,12,0.45)');
+      light.addColorStop(0.8, 'rgba(2,3,8,0.88)');
+      light.addColorStop(1, 'rgba(2,3,8,0.97)');
+      ctx.fillStyle = light; ctx.fillRect(pl.x-pl.r, pl.y-pl.r, pl.r*2, pl.r*2);
     }
+    const limb = ctx.createRadialGradient(pl.x, pl.y, pl.r*0.4, pl.x, pl.y, pl.r);
+    limb.addColorStop(0, 'rgba(0,0,0,0)');
+    limb.addColorStop(1, pl.isSun ? 'rgba(245,95,14,0.55)' : 'rgba(0,0,0,0.5)');
+    ctx.fillStyle = limb; ctx.fillRect(pl.x-pl.r, pl.y-pl.r, pl.r*2, pl.r*2);
+    ctx.restore();
+    if (pl.ring) drawPlanetRings(pl, true);
 
-    // Sun corona pulsing
-    if (pl.isSun) {
-      const pulse = 1 + 0.06 * Math.sin(sunPulse * 1.2);
-      ctx.globalAlpha = 0.4;
-      const coronaR = pl.r * 1.4 * pulse;
-      const cg = ctx.createRadialGradient(pl.x, pl.y, pl.r, pl.x, pl.y, coronaR);
-      cg.addColorStop(0, hexA('#fff2b0', 0.5));
-      cg.addColorStop(1, hexA('#fff2b0', 0));
-      ctx.fillStyle = cg;
-      ctx.beginPath();
-      ctx.arc(pl.x, pl.y, coronaR, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    }
-
-    // Ring (Saturn)
-    if (pl.ring) {
-      ctx.save();
-      ctx.translate(pl.x, pl.y);
-      ctx.rotate(-0.35);
-      ctx.scale(1, 0.28);
-      ctx.strokeStyle = hexA(pl.ringColor, 0.7);
-      ctx.lineWidth = 6;
-      ctx.beginPath();
-      ctx.arc(0, 0, pl.r * 1.55, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.strokeStyle = hexA(pl.ringColor, 0.35);
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.arc(0, 0, pl.r * 1.8, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
-    }
-
-    // Label when not very close.
-    // Counter-rotate so the text stays upright when mobile rocket-up view is on.
     const dCam = Math.hypot(pl.x - camera.x, pl.y - camera.y);
     if (dCam < 1100 && !pl.isSun) {
-      ctx.save();
-      ctx.translate(pl.x, pl.y);
-      ctx.rotate(-viewRotation());
-      ctx.globalAlpha = 0.45;
-      ctx.fillStyle = '#e8ecff';
-      ctx.font = '500 10px "Space Grotesk", system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(pl.name, 0, pl.r + 22);
-      ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(pl.x, pl.y); ctx.rotate(-viewRotation());
+      ctx.fillStyle = 'rgba(232,236,255,0.75)';
+      ctx.font = '500 10px "Space Grotesk", system-ui, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(pl.name + ' · ' + pl.title, 0, pl.r + 24);
       ctx.restore();
     }
-
     ctx.restore();
   }
 

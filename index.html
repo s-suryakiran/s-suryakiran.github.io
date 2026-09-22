@@ -34,7 +34,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/space.css">
+    <link rel="stylesheet" href="assets/css/space.css?v=20260922-5">
 
     <!-- JSON-LD: Person schema so Google / recruiter tools understand who this is -->
     <script type="application/ld+json">
@@ -163,15 +163,23 @@
             <kbd>`</kbd>
         </button>
 
+        <nav id="destination-nav" aria-label="Portfolio sections">
+            <button type="button" data-section="projects">Projects</button>
+            <button type="button" data-section="experience">Experience</button>
+            <button type="button" data-section="contact">Contact</button>
+        </nav>
+
         <!-- Intro / launch screen -->
         <div id="intro">
-            <h1>SURYAKIRAN</h1>
-            <p class="tag">Software Engineer @ Goldman Sachs · ex-MLE</p>
-            <p class="sub">A galactic portfolio. Pilot your rocket through the solar system — each planet opens a chapter of my work, from Madurai to Salt Lake City, from research labs to production systems.</p>
-            <button id="launch" type="button">LAUNCH MISSION</button>
+            <p class="intro-eyebrow">SOFTWARE · MACHINE LEARNING · A LITTLE SPACE</p>
+            <h1>Suryakiran<span> Sureshkumar</span></h1>
+            <p class="tag">Software Engineer at Goldman Sachs · Salt Lake City</p>
+            <p class="sub">I build software for risk analysis and explore machine learning through projects in vision, language, and prediction. Earned my M.S. in Computer Science at NYU’s Courant Institute. Previously a Machine Learning Engineer at Tiger Analytics.</p>
+            <button id="launch" type="button">Explore the solar system</button>
             <!-- Recruiter fast-path: skip the game and read a traditional resume view. -->
-            <button id="express-resume-btn" type="button" class="intro-link">View as resume →</button>
-            <a id="intro-resume-dl" class="intro-link" href="./assets/Suryakiran_Sureshkumar_Resume.pdf" target="_blank" rel="noopener">↓ Download resume (PDF)</a>
+            <button id="express-resume-btn" type="button" class="intro-link">Read my portfolio →</button>
+            <a id="intro-resume-dl" class="intro-link" href="./assets/Suryakiran_Sureshkumar_Resume.pdf?v=20260922" target="_blank" rel="noopener">↓ Download resume (PDF)</a>
+            <p class="intro-note">Each planet holds a chapter. Fly to explore, or use the links above.</p>
             <div class="controls-legend">
                 <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> fly</span>
                 <span><kbd>Shift</kbd> boost</span>
@@ -198,7 +206,7 @@
                         <p class="express-tag">Software Engineer @ Goldman Sachs · ex-MLE · Salt Lake City</p>
                     </div>
                     <div class="express-header-actions">
-                        <a class="express-btn express-btn-primary" href="./assets/Suryakiran_Sureshkumar_Resume.pdf" target="_blank" rel="noopener" id="express-pdf-btn">Download PDF</a>
+                        <a class="express-btn express-btn-primary" href="./assets/Suryakiran_Sureshkumar_Resume.pdf?v=20260922" target="_blank" rel="noopener" id="express-pdf-btn">Download PDF</a>
                         <button class="express-btn" id="express-fly-btn" type="button">Fly the site →</button>
                         <button class="express-btn express-btn-close" id="express-close-btn" type="button" aria-label="Close resume view">✕</button>
                     </div>
@@ -227,7 +235,7 @@
         function closeChatbot() { document.getElementById('chatbotOverlay').style.display = 'none'; }
     </script>
 
-    <script src="assets/js/space.js"></script>
+    <script src="assets/js/space.js?v=20260922-5"></script>
 </body>
 
 </html>

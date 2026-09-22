@@ -2,7 +2,8 @@
 
 An interactive, space-themed portfolio. You pilot a small rocket through the
 solar system; each planet opens a different chapter of my work — projects,
-experience, skills, writing, contact. No scrolling, no nav bar — just flight.
+experience, skills, writing, contact. Direct links to Projects, Experience, and
+Contact also open a readable portfolio view, without requiring flight.
 
 **Live:** https://s-suryakiran.github.io
 
@@ -59,7 +60,9 @@ Type `help` at the `surya@galactic:~$` prompt to see every command
 - 3D Earth globe (inside the Mercury panel): [three.js](https://threejs.org)
   loaded as an ES module directly from a CDN — no bundler. Earth texture is
   procedurally generated in a canvas at runtime (copyright-clean, no asset
-  bloat), with labelled city pins and animated arcs connecting them.
+  bloat), with shaded terrain, selectable city stops, great-circle routes,
+  and optional rotation. The Raleigh internship appears as a dashed branch
+  from New York. Zoom controls and the timeline work on mobile too.
 - Hosted on GitHub Pages.
 
 ---
