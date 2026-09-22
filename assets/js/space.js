@@ -733,6 +733,10 @@
     let drag = { active: false, x: 0, y: 0 };
     let autoRot = false;
     let selectedCity = CITIES.length - 1;
+    let cityCycleElapsed = 0;
+    const CITY_CYCLE_MS = 4200;
+    let targetRotationX = globeGroup.rotation.x;
+    let targetRotationY = globeGroup.rotation.y;
 
 
     const focusCity = index => {
@@ -740,14 +744,17 @@
       selectText(index);
       const city = CITIES[index];
       const position = latLonTo3D(city.lat, city.lon, 1);
-      globeGroup.rotation.set(city.lat * Math.PI / 180, -Math.atan2(position.x, position.z), 0, 'XYZ');
+      targetRotationX = city.lat * Math.PI / 180;
+      targetRotationY = -Math.atan2(position.x, position.z);
       autoRot = false;
       journey.querySelector('[data-globe="rotate"]').setAttribute('aria-pressed', 'false');
     };
     stopButtons.forEach((button, index) => button.onclick = () => focusCity(index));
     focusCity(selectedCity);
-    journey.querySelector('[data-globe="rotate"]').onclick = event => {
+    const rotateButton = journey.querySelector('[data-globe="rotate"]');
+    rotateButton.onclick = event => {
       autoRot = !autoRot;
+      cityCycleElapsed = 0;
       event.currentTarget.setAttribute('aria-pressed', String(autoRot));
     };
     journey.querySelector('[data-globe="in"]').onclick = () => { camera.position.z = Math.max(2.5, camera.position.z - 0.35); };
@@ -767,6 +774,8 @@
       const dy = e.clientY - drag.y;
       globeGroup.rotation.y += dx * 0.006;
       globeGroup.rotation.x = Math.max(-1.1, Math.min(1.1, globeGroup.rotation.x + dy * 0.005));
+      targetRotationY = globeGroup.rotation.y;
+      targetRotationX = globeGroup.rotation.x;
       drag.x = e.clientX;
       drag.y = e.clientY;
     };
@@ -814,7 +823,21 @@
       // Respect prefers-reduced-motion — skip the idle auto-rotation entirely
       // so users with vestibular sensitivity don't get a constantly moving globe.
       const rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (autoRot && !rm) globeGroup.rotation.y += 0.0018;
+      // Ease toward the selected city instead of snapping the globe between stops.
+      const yDelta = Math.atan2(Math.sin(targetRotationY - globeGroup.rotation.y), Math.cos(targetRotationY - globeGroup.rotation.y));
+      globeGroup.rotation.x += (targetRotationX - globeGroup.rotation.x) * 0.075;
+      globeGroup.rotation.y += yDelta * 0.075;
+      if (autoRot) {
+        if (!rm) globeGroup.rotation.y += 0.0018;
+        cityCycleElapsed += 16.67;
+        if (cityCycleElapsed >= CITY_CYCLE_MS) {
+          cityCycleElapsed = 0;
+          selectedCity = (selectedCity + 1) % CITIES.length;
+          focusCity(selectedCity);
+          autoRot = true;
+          rotateButton.setAttribute('aria-pressed', 'true');
+        }
+      }
 
       // Camera forward vector (points away from the camera, into the scene)
       camera.getWorldDirection(_camDir);
